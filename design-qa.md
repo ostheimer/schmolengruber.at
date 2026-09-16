@@ -247,3 +247,11 @@ Ablauf mit Parallelbetrieb, alle Schreibzugriffe über REST-API bzw. die Formula
 Nachtrag: Sitemap in der Search Console getauscht und Yoast gelöscht, Readback danach unverändert. Offen: Weiterleitung `sitemap_index.xml` → `wp-sitemap.xml` braucht `.htaccess`-Zugriff (Apache) oder die Plugin-Funktion aus der Folgeaufgabe. Einstellungsseite des Plugins erscheint auf Englisch, weil das deutsche Sprachpaket noch nicht im Verzeichnis freigegeben ist.
 
 final result: passed
+
+## Security-Header und Browser-Caching – 16. September 2026
+
+Kein FTP/SSH-Zugang; der WordPress-Stammordner ist laut Website-Zustand beschreibbar. Umsetzung über ein site-spezifisches Plugin `wp-plugins/schmolengruber-server-headers/` (Quelle im Repo, per Upload-Formular installiert, per REST aktiviert). Beim Aktivieren schreibt es mit `insert_with_markers()` einen Marker-Block „Schmolengruber Server Headers“ in die `.htaccess`, beim Deaktivieren entfernt es ihn wieder. Alle Regeln liegen in `IfModule mod_headers.c` / `mod_expires.c`. Zusätzlich sendet ein `send_headers`-Hook die Security-Header für PHP-Antworten.
+
+Readback per curl: HTML, WebP, WOFF2 und Sitemap liefern `Strict-Transport-Security: max-age=31536000` (ohne includeSubDomains, weil Subdomains nicht geprüft sind), `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`. Statische Dateien zusätzlich `Cache-Control: public, max-age=31536000, immutable`; HTML bewusst ohne. Kein `Expires`-Header sichtbar, mod_expires ist auf dem Host offenbar nicht geladen; `Cache-Control` reicht. Bewusst kein CSP, weil Avada und WP Rocket Inline-Skripte einsetzen.
+
+final result: passed
