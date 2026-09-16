@@ -1,0 +1,1238 @@
+{
+ "/": {
+  "status": 200,
+  "title": "Schmolengruber Installationen",
+  "description": [
+   "Schmolengruber Installationen ist Ihr Installateur für den Bezirk Gänserndorf: Wärmepumpen, Badplanung und Installationen. Jetzt anfragen!"
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "website",
+   "og:title": "Schmolengruber Installationen",
+   "og:description": "Schmolengruber Installationen ist Ihr Installateur für den Bezirk Gänserndorf: Wärmepumpen, Badplanung und Installationen. Jetzt anfragen!",
+   "og:url": "https://www.schmolengruber.at/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/#breadcrumb"
+      },
+      "description": "Schmolengruber Installationen ist Ihr Installateur für den Bezirk Gänserndorf: Wärmepumpen, Badplanung und Installationen. Jetzt anfragen!",
+      "about": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "datePublished": "2016-06-14T14:16:16+02:00",
+      "dateModified": "2026-09-15T14:04:59+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Schmolengruber Installationen"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/pelletskessel/": {
+  "status": 200,
+  "title": "Pelletskessel - Schmolengruber Installationen",
+  "description": [
+   "Pelletskessel von ETA und Bösch in Schönkirchen-Reyersdorf: Beratung, Planung, Montage und Service für Ihre Pelletheizung im Bezirk Gänserndorf."
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/pelletskessel/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Pelletskessel - Schmolengruber Installationen",
+   "og:description": "Pelletskessel von ETA und Bösch in Schönkirchen-Reyersdorf: Beratung, Planung, Montage und Service für Ihre Pelletheizung im Bezirk Gänserndorf.",
+   "og:url": "https://www.schmolengruber.at/pelletskessel/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/pelletskessel/",
+      "url": "https://www.schmolengruber.at/pelletskessel/",
+      "name": "Pelletskessel - Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/pelletskessel/#breadcrumb"
+      },
+      "description": "Pelletskessel von ETA und Bösch in Schönkirchen-Reyersdorf: Beratung, Planung, Montage und Service für Ihre Pelletheizung im Bezirk Gänserndorf.",
+      "datePublished": "2023-06-27T18:17:51+02:00",
+      "dateModified": "2026-09-14T22:22:39+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/pelletskessel/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Pelletskessel"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/waermepumpen/": {
+  "status": 200,
+  "title": "Wärmepumpen von Schmolengruber Installationen",
+  "description": [
+   "Wärmepumpen bei Schmolengruber Installationen. Wir bieten umweltfreundliche Heizlösungen für Neubauten und Sanierungen in und rund um Gänserndorf. Lassen Sie sich jetzt beraten!"
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/waermepumpen/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Wärmepumpen von Schmolengruber Installationen",
+   "og:description": "Wärmepumpen bei Schmolengruber Installationen. Wir bieten umweltfreundliche Heizlösungen für Neubauten und Sanierungen in und rund um Gänserndorf. Lassen Sie sich jetzt beraten!",
+   "og:url": "https://www.schmolengruber.at/waermepumpen/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/waermepumpen/",
+      "url": "https://www.schmolengruber.at/waermepumpen/",
+      "name": "Wärmepumpen von Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/waermepumpen/#breadcrumb"
+      },
+      "description": "Wärmepumpen bei Schmolengruber Installationen. Wir bieten umweltfreundliche Heizlösungen für Neubauten und Sanierungen in und rund um Gänserndorf. Lassen Sie sich jetzt beraten!",
+      "datePublished": "2023-06-27T17:11:59+02:00",
+      "dateModified": "2026-09-14T22:23:37+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/waermepumpen/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Wärmepumpen"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/gasgeraete/": {
+  "status": 200,
+  "title": "Gasgeräte - Schmolengruber Installationen",
+  "description": [
+   "Gasgeräte und Gas-Brennwerttechnik im Bezirk Gänserndorf: fachgerechte Montage, Wartung und Service für bestehende Anlagen von Schmolengruber Installationen."
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/gasgeraete/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Gasgeräte - Schmolengruber Installationen",
+   "og:description": "Gasgeräte und Gas-Brennwerttechnik im Bezirk Gänserndorf: fachgerechte Montage, Wartung und Service für bestehende Anlagen von Schmolengruber Installationen.",
+   "og:url": "https://www.schmolengruber.at/gasgeraete/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/gasgeraete/",
+      "url": "https://www.schmolengruber.at/gasgeraete/",
+      "name": "Gasgeräte - Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/gasgeraete/#breadcrumb"
+      },
+      "description": "Gasgeräte und Gas-Brennwerttechnik im Bezirk Gänserndorf: fachgerechte Montage, Wartung und Service für bestehende Anlagen von Schmolengruber Installationen.",
+      "datePublished": "2023-06-27T18:34:58+02:00",
+      "dateModified": "2026-09-14T22:23:52+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/gasgeraete/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Gasgeräte"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/klimaanlage-und-klimaanlagenservice/": {
+  "status": 200,
+  "title": "Klimaanlage und Klimaanlagenservice - Schmolengruber Installationen",
+  "description": [
+   "Klimaanlage und Klimaanlagenservice in Schönkirchen-Reyersdorf: Beratung, Montage und Wartung für angenehmes Raumklima im Bezirk Gänserndorf."
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/klimaanlage-und-klimaanlagenservice/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Klimaanlage und Klimaanlagenservice - Schmolengruber Installationen",
+   "og:description": "Klimaanlage und Klimaanlagenservice in Schönkirchen-Reyersdorf: Beratung, Montage und Wartung für angenehmes Raumklima im Bezirk Gänserndorf.",
+   "og:url": "https://www.schmolengruber.at/klimaanlage-und-klimaanlagenservice/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/klimaanlage-und-klimaanlagenservice/",
+      "url": "https://www.schmolengruber.at/klimaanlage-und-klimaanlagenservice/",
+      "name": "Klimaanlage und Klimaanlagenservice - Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/klimaanlage-und-klimaanlagenservice/#breadcrumb"
+      },
+      "description": "Klimaanlage und Klimaanlagenservice in Schönkirchen-Reyersdorf: Beratung, Montage und Wartung für angenehmes Raumklima im Bezirk Gänserndorf.",
+      "datePublished": "2023-06-27T18:48:30+02:00",
+      "dateModified": "2026-09-14T22:24:12+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/klimaanlage-und-klimaanlagenservice/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Klimaanlage und Klimaanlagenservice"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/badezimmer-und-badzimmersanierung/": {
+  "status": 200,
+  "title": "Badezimmer - Schmolengruber Installationen",
+  "description": [
+   "Badezimmer und Badsanierung im Bezirk Gänserndorf: Planung, Installation und Ausstattung aus einer Hand von Schmolengruber Installationen."
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/badezimmer-und-badzimmersanierung/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Badezimmer - Schmolengruber Installationen",
+   "og:description": "Badezimmer und Badsanierung im Bezirk Gänserndorf: Planung, Installation und Ausstattung aus einer Hand von Schmolengruber Installationen.",
+   "og:url": "https://www.schmolengruber.at/badezimmer-und-badzimmersanierung/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/badezimmer-und-badzimmersanierung/",
+      "url": "https://www.schmolengruber.at/badezimmer-und-badzimmersanierung/",
+      "name": "Badezimmer - Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/badezimmer-und-badzimmersanierung/#breadcrumb"
+      },
+      "description": "Badezimmer und Badsanierung im Bezirk Gänserndorf: Planung, Installation und Ausstattung aus einer Hand von Schmolengruber Installationen.",
+      "datePublished": "2023-06-27T21:03:12+02:00",
+      "dateModified": "2026-09-14T22:24:54+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/badezimmer-und-badzimmersanierung/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Badezimmer"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/kleine-reparaturen-und-installationen/": {
+  "status": 200,
+  "title": "Kleine Reparaturen - Schmolengruber Installationen",
+  "description": [
+   "Kleine Reparaturen und Installationen an Heizung, Wasser und Sanitär: schnelle, saubere Hilfe in Schönkirchen-Reyersdorf und Umgebung."
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/kleine-reparaturen-und-installationen/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Kleine Reparaturen - Schmolengruber Installationen",
+   "og:description": "Kleine Reparaturen und Installationen an Heizung, Wasser und Sanitär: schnelle, saubere Hilfe in Schönkirchen-Reyersdorf und Umgebung.",
+   "og:url": "https://www.schmolengruber.at/kleine-reparaturen-und-installationen/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/kleine-reparaturen-und-installationen/",
+      "url": "https://www.schmolengruber.at/kleine-reparaturen-und-installationen/",
+      "name": "Kleine Reparaturen - Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/kleine-reparaturen-und-installationen/#breadcrumb"
+      },
+      "description": "Kleine Reparaturen und Installationen an Heizung, Wasser und Sanitär: schnelle, saubere Hilfe in Schönkirchen-Reyersdorf und Umgebung.",
+      "datePublished": "2023-06-27T21:05:54+02:00",
+      "dateModified": "2026-09-14T22:25:09+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/kleine-reparaturen-und-installationen/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Kleine Reparaturen"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/neubauinstallationen/": {
+  "status": 200,
+  "title": "Neubauinstallationen - Schmolengruber Installationen",
+  "description": [
+   "Neubauinstallationen für Heizung, Wasser und Sanitär im Bezirk Gänserndorf: frühzeitig geplant und fachgerecht ausgeführt von Schmolengruber Installationen."
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/neubauinstallationen/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Neubauinstallationen - Schmolengruber Installationen",
+   "og:description": "Neubauinstallationen für Heizung, Wasser und Sanitär im Bezirk Gänserndorf: frühzeitig geplant und fachgerecht ausgeführt von Schmolengruber Installationen.",
+   "og:url": "https://www.schmolengruber.at/neubauinstallationen/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/neubauinstallationen/",
+      "url": "https://www.schmolengruber.at/neubauinstallationen/",
+      "name": "Neubauinstallationen - Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/neubauinstallationen/#breadcrumb"
+      },
+      "description": "Neubauinstallationen für Heizung, Wasser und Sanitär im Bezirk Gänserndorf: frühzeitig geplant und fachgerecht ausgeführt von Schmolengruber Installationen.",
+      "datePublished": "2023-06-27T18:54:45+02:00",
+      "dateModified": "2026-09-14T22:36:11+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/neubauinstallationen/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Neubauinstallationen"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/sanierungsarbeiten/": {
+  "status": 200,
+  "title": "Sanierungsarbeiten - Schmolengruber Installationen",
+  "description": [
+   "Sanierungsarbeiten an Heizung und Haustechnik im Bezirk Gänserndorf: bestehende Anlagen sinnvoll modernisieren mit Schmolengruber Installationen."
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/sanierungsarbeiten/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Sanierungsarbeiten - Schmolengruber Installationen",
+   "og:description": "Sanierungsarbeiten an Heizung und Haustechnik im Bezirk Gänserndorf: bestehende Anlagen sinnvoll modernisieren mit Schmolengruber Installationen.",
+   "og:url": "https://www.schmolengruber.at/sanierungsarbeiten/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/sanierungsarbeiten/",
+      "url": "https://www.schmolengruber.at/sanierungsarbeiten/",
+      "name": "Sanierungsarbeiten - Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/sanierungsarbeiten/#breadcrumb"
+      },
+      "description": "Sanierungsarbeiten an Heizung und Haustechnik im Bezirk Gänserndorf: bestehende Anlagen sinnvoll modernisieren mit Schmolengruber Installationen.",
+      "datePublished": "2023-06-27T21:47:52+02:00",
+      "dateModified": "2026-09-14T22:36:17+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/sanierungsarbeiten/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Sanierungsarbeiten"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/impressum/": {
+  "status": 200,
+  "title": "Impressum - Schmolengruber Installationen",
+  "description": [
+   "Impressum der Schmolengruber Installationen GmbH, Hauptstraße 18, 2241 Schönkirchen-Reyersdorf: Firmenangaben, Gewerbeberechtigungen und Kontakt."
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/impressum/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Impressum - Schmolengruber Installationen",
+   "og:description": "Impressum der Schmolengruber Installationen GmbH, Hauptstraße 18, 2241 Schönkirchen-Reyersdorf: Firmenangaben, Gewerbeberechtigungen und Kontakt.",
+   "og:url": "https://www.schmolengruber.at/impressum/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/impressum/",
+      "url": "https://www.schmolengruber.at/impressum/",
+      "name": "Impressum - Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/impressum/#breadcrumb"
+      },
+      "description": "Impressum der Schmolengruber Installationen GmbH, Hauptstraße 18, 2241 Schönkirchen-Reyersdorf: Firmenangaben, Gewerbeberechtigungen und Kontakt.",
+      "datePublished": "2023-05-18T10:47:49+02:00",
+      "dateModified": "2026-09-09T11:52:23+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/impressum/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Impressum"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/datenschutzerklaerung/": {
+  "status": 200,
+  "title": "Datenschutzerklärung - Schmolengruber Installationen",
+  "description": [
+   "Datenschutzerklärung der Schmolengruber Installationen GmbH: Informationen zur Verarbeitung personenbezogener Daten auf schmolengruber.at."
+  ],
+  "canonical": [
+   "https://www.schmolengruber.at/datenschutzerklaerung/"
+  ],
+  "robots": [],
+  "og": {
+   "og:locale": "de_DE",
+   "og:type": "article",
+   "og:title": "Datenschutzerklärung - Schmolengruber Installationen",
+   "og:description": "Datenschutzerklärung der Schmolengruber Installationen GmbH: Informationen zur Verarbeitung personenbezogener Daten auf schmolengruber.at.",
+   "og:url": "https://www.schmolengruber.at/datenschutzerklaerung/",
+   "og:site_name": "Schmolengruber Installationen"
+  },
+  "jsonld": [
+   {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "ImageObject",
+      "@id": "https://www.schmolengruber.at/#logo",
+      "url": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "contentUrl": "https://www.schmolengruber.at/wp-content/uploads/2023/05/schmolengruber-schriftzugx1.png",
+      "width": 597,
+      "height": 54,
+      "caption": "Schmolengruber Installationen GmbH"
+     },
+     {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://www.schmolengruber.at/#organization",
+      "name": "Schmolengruber Installationen GmbH",
+      "url": "https://www.schmolengruber.at/",
+      "telephone": "+43 2282 61402",
+      "email": "office@schmolengruber.at",
+      "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Hauptstraße 18",
+       "addressLocality": "Schönkirchen-Reyersdorf",
+       "addressRegion": "Niederösterreich",
+       "postalCode": "2241",
+       "addressCountry": "AT"
+      },
+      "areaServed": "Bezirk Gänserndorf",
+      "image": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      },
+      "logo": {
+       "@id": "https://www.schmolengruber.at/#logo"
+      }
+     },
+     {
+      "@type": "WebSite",
+      "@id": "https://www.schmolengruber.at/#website",
+      "url": "https://www.schmolengruber.at/",
+      "name": "Schmolengruber Installationen",
+      "publisher": {
+       "@id": "https://www.schmolengruber.at/#organization"
+      },
+      "inLanguage": "de",
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "https://www.schmolengruber.at/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+       }
+      ]
+     },
+     {
+      "@type": "WebPage",
+      "@id": "https://www.schmolengruber.at/datenschutzerklaerung/",
+      "url": "https://www.schmolengruber.at/datenschutzerklaerung/",
+      "name": "Datenschutzerklärung - Schmolengruber Installationen",
+      "isPartOf": {
+       "@id": "https://www.schmolengruber.at/#website"
+      },
+      "inLanguage": "de",
+      "breadcrumb": {
+       "@id": "https://www.schmolengruber.at/datenschutzerklaerung/#breadcrumb"
+      },
+      "description": "Datenschutzerklärung der Schmolengruber Installationen GmbH: Informationen zur Verarbeitung personenbezogener Daten auf schmolengruber.at.",
+      "datePublished": "2023-06-27T23:24:09+02:00",
+      "dateModified": "2026-09-09T11:29:41+02:00"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.schmolengruber.at/datenschutzerklaerung/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.schmolengruber.at/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Datenschutzerklärung"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/sitemap_index.xml": {
+  "error": "HTTP Error 404: Not Found"
+ },
+ "/page-sitemap.xml": {
+  "error": "HTTP Error 404: Not Found"
+ },
+ "/wp-sitemap.xml": {
+  "status": 200,
+  "locs": [
+   "https://www.schmolengruber.at/wp-sitemap-posts-page-1.xml"
+  ],
+  "body_head": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"https://www.schmolengruber.at/wp-sitemap-index.xsl\" ?>\n<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><sitemap><loc>https://www.schmolengruber.at/wp-sitemap-posts-page-1.xml</loc></sitemap></sitemapindex>\n"
+ },
+ "/robots.txt": {
+  "status": 200,
+  "locs": [],
+  "body_head": "User-agent: *\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n\nSitemap: https://www.schmolengruber.at/wp-sitemap.xml\n"
+ }
+}

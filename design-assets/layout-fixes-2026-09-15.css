@@ -1,0 +1,52 @@
+/* Global header and service-detail corrections published in Avada section 235, revision 23. */
+/* The existing header breakpoint was changed from 1050px to 1120px before this block. */
+.sch-detail h1 > span:last-child {
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+@media (min-width: 1121px) {
+  .sch-detail h1 {
+    font-size: clamp(36px, 3.45vw, 50px) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1120px) {
+  .sch-detail__hero {
+    grid-template-columns: 1fr;
+  }
+
+  .sch-detail__intro {
+    padding: 38px 34px 34px;
+  }
+
+  .sch-detail__image,
+  .sch-detail__image > img {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 360px) {
+  .sch-detail h1 {
+    gap: 9px !important;
+    font-size: 25px !important;
+  }
+
+  .sch-detail__title-icon {
+    flex-basis: 38px;
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+}
+
+.sch-services > .sch-services__contact {
+  margin: 0 0 30px;
+}
+
+@media (max-width: 600px) {
+  .sch-services > .sch-services__contact {
+    margin: 0 0 24px;
+  }
+}

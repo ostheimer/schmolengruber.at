@@ -1,0 +1,114 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "h1": 1,
+    "detail": 0,
+    "symbolLabels": 9,
+    "meta": [
+      "Schmolengruber Installationen ist Ihr Installateur für den Bezirk Gänserndorf: Wärmepumpen, Badplanung und Installationen. Jetzt anfragen!",
+      "Heizung · Bad · Klima · InstallationenUnsere LeistungenVon effizienter Heiztechnik bis zur kompletten Badsanierung: Wir planen, installieren und betreuen Ihre Haustechnik persönlich und zuverlässig.Symbolbild"
+    ]
+  },
+  {
+    "path": "/waermepumpen/",
+    "status": 200,
+    "h1": 1,
+    "detail": 1,
+    "symbolLabels": 1,
+    "meta": [
+      "Wärmepumpen bei Schmolengruber Installationen. Wir bieten umweltfreundliche Heizlösungen für Neubauten und Sanierungen in und rund um Gänserndorf. Lassen Sie sich jetzt beraten!",
+      "Heizen und kühlenWärmepumpenEffiziente Wärme für Ihr Zuhause – passend zu Gebäude, Wärmebedarf und persönlichem Komfort.Symbolbild1BeratungBedarf und Bestand klären2PlanungLösung sauber abstimmen3MontageFachgerecht umsetzen"
+    ]
+  },
+  {
+    "path": "/pelletskessel/",
+    "status": 200,
+    "h1": 1,
+    "detail": 1,
+    "symbolLabels": 1,
+    "meta": [
+      "Heizen mit HolzpelletsPelletskesselKomfortable Wärme aus Holzpellets – sorgfältig geplant und sauber in Ihr Heizsystem eingebunden.Symbolbild1BeratungBedarf und Bestand klären2PlanungLösung sauber abstimmen"
+    ]
+  },
+  {
+    "path": "/gasgeraete/",
+    "status": 200,
+    "h1": 1,
+    "detail": 1,
+    "symbolLabels": 1,
+    "meta": [
+      "Heiztechnik und ServiceGasgeräteZuverlässige Gas-Brennwerttechnik, fachgerechte Montage und kompetenter Service für bestehende Anlagen.Symbolbild1BeratungBedarf und Bestand klären2PlanungLösung sauber abstimmen3MontageFachgerecht umsetzen4ServiceLangfristig erreichbar"
+    ]
+  },
+  {
+    "path": "/klimaanlage-und-klimaanlagenservice/",
+    "status": 200,
+    "h1": 1,
+    "detail": 1,
+    "symbolLabels": 1,
+    "meta": [
+      "Angenehmes RaumklimaKlimaanlagenGut temperierte Räume im Sommer – mit einer Anlage, die zu Raumgröße, Nutzung und Gebäude passt.Symbolbild1BeratungBedarf und Bestand klären2PlanungLösung sauber abstimmen"
+    ]
+  },
+  {
+    "path": "/neubauinstallationen/",
+    "status": 200,
+    "h1": 1,
+    "detail": 1,
+    "symbolLabels": 1,
+    "meta": [
+      "Technik für den NeubauNeubauHeizung, Wasser und Sanitär frühzeitig geplant – damit Leitungswege, Anschlüsse und Termine zusammenpassen.Symbolbild1BeratungBedarf und Bestand klären2PlanungLösung sauber abstimmen"
+    ]
+  },
+  {
+    "path": "/sanierungsarbeiten/",
+    "status": 200,
+    "h1": 1,
+    "detail": 1,
+    "symbolLabels": 1,
+    "meta": [
+      "Bestehendes modernisierenSanierungenBestehende Haustechnik sinnvoll erneuern – abgestimmt auf Gebäude, Budget und die weiteren Arbeiten.Symbolbild1BeratungBedarf und Bestand klären2PlanungLösung sauber abstimmen"
+    ]
+  },
+  {
+    "path": "/badezimmer-und-badzimmersanierung/",
+    "status": 200,
+    "h1": 1,
+    "detail": 1,
+    "symbolLabels": 1,
+    "meta": [
+      "Bad gestaltenBadezimmerEin Bad, das im Alltag funktioniert und zu Ihrem Stil passt – von den Anschlüssen bis zur Ausstattung.Symbolbild1BeratungBedarf und Bestand klären2PlanungLösung"
+    ]
+  },
+  {
+    "path": "/kleine-reparaturen-und-installationen/",
+    "status": 200,
+    "h1": 1,
+    "detail": 1,
+    "symbolLabels": 1,
+    "meta": [
+      "Schnelle Hilfe im AlltagReparaturenVom tropfenden Wasserhahn bis zum Gerätetausch – zuverlässig erledigt und sauber hinterlassen.Symbolbild1BeratungBedarf und Bestand klären2PlanungLösung sauber abstimmen3MontageFachgerecht umsetzen"
+    ]
+  },
+  {
+    "path": "/impressum/",
+    "status": 200,
+    "h1": 1,
+    "detail": 0,
+    "symbolLabels": 0,
+    "meta": [
+      "Impressum\r\nUnternehmen und Kontakt\r\nSCHMOLENGRUBER INSTALLATIONEN GmbH\r\nHauptstraße 182241 Schönkirchen-ReyersdorfÖsterreich\r\nTelefon: +43 2282 61402\r\nMobil: +43 660 390 12 15\r\nE-Mail: office@schmolengruber.at\r\nAnfahrt anzeigen\r\nFirmenangaben\r\nRechtsform: Gesellschaft mit beschränkter Haftung\r\nSitz: Schönkirchen-Reyersdorf\r\nFirmenbuchnummer: FN 505743s\r\nFirmenbuchgericht: Landesgericht Korneuburg\r\nUID-Nummer: ATU74319249\r\nGewerbe und Mitgliedschaft\r\nUnternehmensgegenstand: Gas- und Sanitärtechnik sowie Heizungs- und Lüftungstechnik.\r\nMitglied der Wirtschaftskammer Niederösterreich, Landesinnung"
+    ]
+  },
+  {
+    "path": "/datenschutzerklaerung/",
+    "status": 200,
+    "h1": 1,
+    "detail": 0,
+    "symbolLabels": 0,
+    "meta": [
+      "Datenschutzerklärung \r\nEinleitung und Überblick\r\nWir haben diese Datenschutzerklärung (Fassung 20.08.2024-122528901) verfasst, um Ihnen gemäß der Vorgaben der Datenschutz-Grundverordnung (EU) 2016/679 und anwendbaren nationalen Gesetzen zu erklären, welche personenbezogenen Daten (kurz Daten) wir als Verantwortliche – und die von uns beauftragten Auftragsverarbeiter (z. B. Provider) – verarbeiten, zukünftig verarbeiten werden"
+    ]
+  }
+]
