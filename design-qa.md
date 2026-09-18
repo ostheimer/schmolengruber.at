@@ -248,6 +248,61 @@ Nachtrag: Sitemap in der Search Console getauscht und Yoast gelöscht, Readback 
 
 final result: passed
 
+## Wärmepumpen-Bild verkleinert – 18. September 2026
+
+Ziel: mobiler LCP der Wärmepumpen-Seite (Briefing: 4,8 s, Lighthouse mobil) durch ein kleineres Symbolbild verbessern, ohne Ausschnitt, Seitenverhältnis oder Alt-Text zu ändern.
+
+### Austausch
+
+- Alt: `waermepumpe-buderus-symbolbild.webp`, Anhang-ID 772, 1536 × 1024. Ausgelieferte Größe per HTTP-Header 284.580 Bytes (278 KB, deckt sich mit dem Briefing); die WP-REST-Metadaten (`media_details.filesize`) melden davon abweichend 307.138 Bytes — vermutlich ein veralteter Metadatenwert, nicht die tatsächlich ausgelieferte Datei. Anhang 772 bleibt unverändert im Medienarchiv erhalten, nicht gelöscht.
+- Neu: `waermepumpe-buderus-symbolbild-v2.webp`, Anhang-ID 854, 1536 × 1024, 91.188 Bytes (−67,9 % gegenüber der ausgelieferten Alt-Größe). Hochgeladen per `POST /wp-json/wp/v2/media` aus dem Blob der committeten Datei (Commit `db7505f`, per raw.githubusercontent.com verifiziert: 200, exakt 91.188 Bytes, 1536 × 1024). `alt_text`, `title` und `caption` von Anhang 772 übernommen (Titel „waermepumpe-buderus-symbolbild“, Alt-Text und Caption jeweils leer wie im Original).
+- Der sichtbare Alt-Text „Symbolbild einer Buderus Luft-Wasser-Wärmepumpe“ stammt aus dem im Seiteninhalt hinterlegten `alt`-Attribut des Bildblocks, nicht aus der Medienbibliothek, und blieb durch die reine URL-Ersetzung unverändert.
+
+### Geänderte Seiten
+
+Nur Inhalt ersetzt, keine weiteren Änderungen:
+
+| Seite | ID | Ersetzte Stellen | Revisions-ID davor |
+|---|---|---|---|
+| Startseite | 2 | 1 | 840 |
+| Wärmepumpen | 63 | 1 | 796 |
+
+Auf beiden Seiten kam die alte URL vor dem Eingriff genau einmal in `content.raw` vor und war danach mit 0 Treffern vollständig ersetzt; keine Vorkommen von `772` (z. B. `wp-image-772`) in einer der beiden Seiten gefunden, also keine ID-Referenzen zu bereinigen.
+
+Cache geleert: `purge_cache&type=all`, `rocket_clean_saas`, `rocket_clean_performance_hints` — alle drei Aufrufe HTTP 200 mit Redirect zurück auf `/wp-admin/`.
+
+### Readback (curl, kanonisch ohne Query-Parameter, `Mozilla/5.0`)
+
+| Prüfung | Startseite `/` | `/waermepumpen/` |
+|---|---|---|
+| Alte Datei im HTML | 0× | 0× |
+| Neue Datei im HTML | 2× (lazy `img` + `noscript`-Fallback, dasselbe Bild) | 2× (dito) |
+| `width="1536" height="1024"` am Bild | unverändert vorhanden | unverändert vorhanden |
+| H1-Anzahl | 1 | 1 |
+| `meta name="description"`-Anzahl | 1 | 1 |
+| Direkter Abruf neue Bild-URL | HTTP 200, `Content-Length: 91188`, `Cache-Control: public, max-age=31536000, immutable` | (dieselbe Datei) |
+
+WP-Rocket-Preload-Hint (`<link rel="preload" as="image">`) auf das neue Bild: bei drei aufeinanderfolgenden Abrufen von `/waermepumpen/` nach der Cache-Leerung nicht vorhanden — auf der Seite erscheinen aktuell nur Font-Preloads, kein Bild-Preload. Nicht erzwungen, wie vorgegeben; das ist ein reines Beobachtungsergebnis, keine Fehlerbehebung im Auftrag.
+
+### Lighthouse mobil, `/waermepumpen/`, Performance-Kategorie
+
+| Lauf | Score | LCP |
+|---|---|---|
+| 1 | 0,81 | 4,2 s (4163 ms) |
+| 2 | 0,84 | 4,2 s (4160 ms) |
+| 3 | 0,82 | 4,2 s (4166 ms) |
+| **Median** | **0,82** | **4,2 s (4163 ms)** |
+
+Vorher (Briefing, nicht in dieser Session gemessen): LCP 4,8 s. Nachher gemessen: Median 4,2 s, also rund 0,6 s schneller. Das LCP-Element ist im ersten Lauf per `network-requests`-Audit bestätigt die neue Bilddatei (`transferSize` 91.727, `resourceSize` 91.188 Bytes, Priorität „High“) — die Bildverkleinerung wirkt sich also direkt auf das gemessene LCP-Element aus, auch wenn LCP-Zeit weiterhin von anderen Faktoren (Serverantwort, Renderpfad) mitbestimmt wird.
+
+### Grenzen
+
+- Kein „vorher“-Lighthouse-Lauf in dieser Session; der Vergleichswert 4,8 s stammt aus dem Auftrag.
+- Kein Nachweis, warum der WP-Rocket-Bild-Preload-Hint fehlt; dessen Erzeugung hängt an echten Seitenaufrufen (RUM) und war nicht Teil des Auftrags, das zu beheben.
+- Discrepancy der REST-`filesize`-Metadaten des alten Anhangs (307.138 Bytes) gegenüber der tatsächlich ausgelieferten Größe (284.580 Bytes) nicht weiter untersucht.
+
+final result: passed
+
 ## Security-Header und Browser-Caching – 16. September 2026
 
 Kein FTP/SSH-Zugang; der WordPress-Stammordner ist laut Website-Zustand beschreibbar. Umsetzung über ein site-spezifisches Plugin `wp-plugins/schmolengruber-server-headers/` (Quelle im Repo, per Upload-Formular installiert, per REST aktiviert). Beim Aktivieren schreibt es mit `insert_with_markers()` einen Marker-Block „Schmolengruber Server Headers“ in die `.htaccess`, beim Deaktivieren entfernt es ihn wieder. Alle Regeln liegen in `IfModule mod_headers.c` / `mod_expires.c`. Zusätzlich sendet ein `send_headers`-Hook die Security-Header für PHP-Antworten.
