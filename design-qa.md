@@ -310,3 +310,52 @@ Kein FTP/SSH-Zugang; der WordPress-Stammordner ist laut Website-Zustand beschrei
 Readback per curl: HTML, WebP, WOFF2 und Sitemap liefern `Strict-Transport-Security: max-age=31536000` (ohne includeSubDomains, weil Subdomains nicht geprüft sind), `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`. Statische Dateien zusätzlich `Cache-Control: public, max-age=31536000, immutable`; HTML bewusst ohne. Kein `Expires`-Header sichtbar, mod_expires ist auf dem Host offenbar nicht geladen; `Cache-Control` reicht. Bewusst kein CSP, weil Avada und WP Rocket Inline-Skripte einsetzen.
 
 final result: passed
+
+## Avada-CSS-Regression – 22./23. September 2026
+
+### Befund
+
+Jede Seite lieferte seit einem Zeitpunkt zwischen 19:08 und ca. 19:25 Uhr am 22.09. rohes HTML von ca. 1,4–1,5 MB (~193–199 KB br-komprimiert) statt der vorherigen ~0,3 MB. Ursache: `<style id="fusion-stylesheet-inline-css">` im `<head>` mit rund 1,12 MB Avada-Dynamic-CSS, obwohl Avada → Optionen → Leistung → „CSS Compiling Method“ auf **Datei** steht. Erwartet wäre eine kompilierte Datei unter `wp-content/uploads/fusion-styles/`, kein Inline-Block dieser Größe. Betroffen sind alle 11 Seiten der Sitemap, stichprobenhaft an `/` und `/pelletskessel/` mit mobilem und Desktop-UA gemessen.
+
+Direkter Hinweis aus Avada selbst (Optionen → Leistung → Dynamisches CSS & JS, unterhalb „Cache Server IP“): „**IMPORTANT NOTE: JS Compiler is disabled. File does not exist or access is restricted.**“ – derselbe Compiler-Mechanismus, der auch das CSS in Dateiform schreiben soll, meldet für sein Geschwisterverzeichnis (`uploads/fusion-scripts`) explizit ein Zugriffs-/Existenzproblem. `wp-content/uploads/fusion-styles/` und `wp-content/uploads/fusion-scripts/` antworten beide mit HTTP 404 (nicht 403 wie das übergeordnete, existierende `uploads/`-Verzeichnis), was für nicht angelegte Unterverzeichnisse statt für eine reine Listing-Sperre spricht.
+
+### Eingriff
+
+1. **Avada Cache zurücksetzen**: Button in Optionen → Leistung → Dynamisches CSS & JS. Der reguläre Klickpfad scheitert im automatisierten Browser strukturell, weil die Aktion vor der Ausführung einen nativen `confirm()`-Dialog („Are you sure you want to reset all Avada caches?“) erfordert, den der Browser-Automation-Kontext grundsätzlich mit „Abbrechen“ beantwortet (per Log bestätigt, zweimal). Deshalb wurde exakt derselbe Vorgang ausgelöst, den der Klick nach einem „Ja“ ausgeführt hätte: derselbe `jQuery.post`-Aufruf an `admin-ajax.php` mit `action: fusion_reset_all_caches` und dem echten, aus der Seite gelesenen Nonce. HTTP 200; Rückgabewert „0“, was bei dieser WordPress-Aktion (kein explizites `wp_die()` mit Payload im Handler) das reguläre Verhalten ist – die eigene Erfolgsmeldung des Buttons prüft den Rückgabewert ebenfalls nicht, sondern zeigt nach Abschluss des Requests immer „Alle Avada Caches wurden zurückgesetzt.“ Keine weiteren Avada-Optionen geändert.
+2. **WP Rocket leeren**: aus `#wpadminbar` per `fetch` `action=purge_cache&type=all`, `action=rocket_clean_saas` (Used CSS) und `action=rocket_clean_performance_hints`, je mit dem echten Nonce der Seite. Alle drei HTTP 200 mit Redirect zurück auf die Referrer-Seite.
+3. **Warmlauf**: alle 11 Sitemap-Seiten (`wp-sitemap-posts-page-1.xml`) je zweimal anonym per curl abgerufen, mobiler und Desktop-UA, mit Wartezeit dazwischen – 44 Requests insgesamt, alle HTTP 200.
+4. **Wartefenster**: `/` danach über rund 13 Minuten in Abständen von 60–90 s erneut abgerufen (6 Prüfpunkte zwischen 23:05 und 23:13 Uhr) und die Länge von `fusion-stylesheet-inline-css` mit einem DOTALL-korrekten Parser gemessen (ein erster Versuch mit `grep -E` ohne Mehrzeilen-Unterstützung hätte fälschlich „0“ gemeldet und wurde verworfen, bevor er gemeldet wurde).
+
+### Vorher/Nachher
+
+| Seite | UA | Übertragen vorher | Übertragen nachher | Roh vorher | Roh nachher | Avada-Inline-CSS vorher | Avada-Inline-CSS nachher |
+|---|---|---|---|---|---|---|---|
+| `/` | mobil | 198.069 B | 197.417 B | 1.465.454 B | 1.468.134 B | 1.118.924 B | 1.118.924 B |
+| `/` | desktop | 198.738 B | 196.711 B | 1.461.130 B | 1.463.710 B | 1.118.924 B | 1.118.924 B |
+| `/pelletskessel/` | mobil | 193.367 B | 193.015 B | 1.420.828 B | 1.423.508 B | 1.118.930 B | 1.118.930 B |
+| `/pelletskessel/` | desktop | 193.755 B | 193.735 B | 1.421.205 B | 1.423.188 B | 1.118.930 B | 1.118.930 B |
+
+Der Avada-Inline-CSS-Block ist vor und nach dem Eingriff auf Byte genau gleich groß (auf `/pelletskessel/` durchgängig 6 Byte größer als auf `/`, seitenspezifischer Inhalt, aber unverändert über die gesamte Messreihe). Kein `<link rel="stylesheet">` auf eine kompilierte Avada-Datei im `<head>`, weder vorher noch nachher. WP-Rocket-Used-CSS (`wpr-usedcss`, separater Mechanismus) hat sich wie erwartet neu aufgebaut (~199–212 KB je nach Seite/UA) – dieser Teil der Kette funktioniert; nur Avadas eigene Dynamic-CSS-Kompilierung zur Datei bleibt aus.
+
+### Sichtprüfung
+
+Anonyme Screenshots von `/` und `/pelletskessel/` bei 1440 × 900 und 390 × 844 (Headless Chrome, frisches Profil): Header, Navigation, Hero, Bild und Content-Karten sehen auf allen vier Aufnahmen unauffällig aus, keine fehlenden Stile oder verschobenen Karten. Eine anfängliche Auffälligkeit – bei 390 × 844 wirkten Navigationselemente und Textzeilen am rechten Rand abgeschnitten – erwies sich bei Gegenprobe im Browser-Pane (`document.documentElement.scrollWidth` = `clientWidth` = 390, kein horizontaler Überlauf) als Artefakt des alten `--screenshot`-Flags von Headless Chrome, nicht als echtes Layoutproblem.
+
+### Lighthouse mobil, v13.5.0, je 3 Läufe
+
+| Seite | Score (Median) | LCP (Median) | FCP (Median) | Dokumentgröße (Median, Lighthouse-Netzwerkmessung) |
+|---|---|---|---|---|
+| `/` | 0,87 | 3,90 s | 1,95 s | 574,2 KB |
+| `/waermepumpen/` | 0,83 | 4,49 s | 1,85 s | 569,9 KB |
+
+Vergleichswert 22.09. für `/` (13.5.0, 3 Läufe, laut Auftrag): LCP 3,9 s, FCP 2,0 s – praktisch identisch zu den hier gemessenen 3,90 s / 1,95 s. Das bestätigt, dass sich der Zustand seit der ursprünglichen Messung nicht verändert hat; für `/waermepumpen/` liegt kein Vergleichswert aus derselben Messreihe vor. Nachrichtlich: Die letzte Wärmepumpen-Messung aus dem Bildverkleinerungs-Eintrag vom 18.09. (vor dieser Regression, andere Ausgangslage) hatte LCP-Median 4,2 s; die hier gemessenen 4,49 s liegen leicht darüber, was zur beschriebenen Verschlechterung passt, aber kein sauberes Vorher/Nachher-Paar für genau diese Regression ist. „Reduce unused CSS“ meldet im ersten Homepage-Lauf geschätzte 168 KiB Einsparung – konsistent mit dem übergroßen Inline-Block.
+
+### Grenzen
+
+- Der Eingriff hat die Ursache nicht behoben. Avada kann laut eigener Meldung nicht in `uploads/fusion-scripts` schreiben (und vermutlich analog nicht in `uploads/fusion-styles`); beide Pfade liefern HTTP 404 statt einer bestehenden, aber leeren/gesperrten Datei. Kein FTP/SSH-Zugriff in dieser Session, um Verzeichnis oder Berechtigungen direkt zu prüfen oder anzulegen – laut Auftrag an dieser Stelle bewusst kein weiterer Eingriff, nur lesende Prüfung.
+- WordPress-eigener Website-Zustand-Bericht meldet das übergeordnete „Uploads-Verzeichnis“ als „Beschreibbar“ – das ist eine Prüfung des Basisverzeichnisses, keine Aussage über die (fehlenden) Unterverzeichnisse `fusion-styles`/`fusion-scripts` selbst.
+- Auffällig, aber nicht Teil dieses Auftrags: Avada zeigt aktuell Version 7.16.1 (Versionsverlauf: zuvor 7.13.3, 7.14.0, 7.15.6), während die Problembeschreibung von 7.15.6 ausging. Ob ein zwischenzeitliches Auto-Update zeitlich mit dem Beginn der Regression (19:08–19:25 Uhr) zusammenfällt, wurde nicht untersucht.
+- Kein Zugriff auf Server-Logs oder PHP-Fehlerprotokolle, um die genaue Fehlerursache (Berechtigungen, offener `open_basedir`, Kontingent, o. Ä.) zu bestätigen.
+- Sichtprüfung per Headless-Chrome-CLI, keine echten Geräte.
+
+final result: failed
