@@ -9,6 +9,12 @@ werden sollten.
 
 Gemessen am 22.09.2026, zwischen ca. 21:10 und 21:45 Uhr (MESZ).
 
+**Nachtrag, selber Tag:** Die vier zunächst offenen Punkte zu Cloudflare-AVV,
+Data-Privacy-Framework-Status, ManageWP Worker und Imagify wurden zusätzlich anhand
+offizieller Quellen recherchiert und belegt (siehe Abschnitt 1.3). Die Punkte
+„AVV mit move1" und „Log-Speicherdauer bei move1" bleiben offen, da sie nur move1
+selbst beantworten kann (siehe Abschnitt 6, Mailentwurf vorbereitet).
+
 ---
 
 ## 1. Messung und Abgleichstabelle
@@ -79,6 +85,97 @@ Seiten, und ist die belastbare Quelle für die Aussage „keine Cookies“.
 Zur Einordnung der Textmenge: Die aktuelle Live-Fassung hat laut eigener
 Zählung des Hauptinhalts ca. 8.118 Wörter (PM-Angabe „ca. 8.100“ bestätigt
 sich damit).
+
+### 1.3 Rechercheergebnisse zu vier offenen Punkten (Nachtrag 22.09.2026)
+
+Vier der ursprünglich offenen Punkte wurden zusätzlich anhand offizieller
+Primärquellen recherchiert (Anbieter-Originaldokumente bzw. das amtliche
+DPF-Teilnehmerregister, keine Blogs oder Drittzusammenfassungen). Diese Quellenbelege
+sind reine Analyse-/Recherchenotizen für Andreas und gehören **nicht** in den
+öffentlichen Text der Datenschutzerklärung – dort fließt nur das Ergebnis ein.
+
+**1. Cloudflare Customer DPA – automatisch Bestandteil der Nutzungsbedingungen?**
+
+Ja, belegt. Die Cloudflare Self-Serve Subscription Agreement (gilt auch für
+Free-/Self-Serve-Kunden) bindet das Data Processing Addendum in Abschnitt 6.1 „Data
+Processing“ per Verweis ein:
+
+> „Cloudflare will handle such Personal Data in compliance with Cloudflare's Data
+> Processing Addendum […] which is hereby incorporated by reference into this
+> Agreement.“
+> — Cloudflare Self-Serve Subscription Agreement, Abschnitt 6.1 „Data Processing“,
+> https://www.cloudflare.com/terms/, abgerufen 22.09.2026
+
+Voraussetzung ist laut demselben Absatz nur, dass die verarbeiteten „Customer
+Content“-Daten personenbezogene Daten von EU-Betroffenen bzw. CCPA-Daten enthalten –
+das trifft hier zu (IP-Adressen der Website-Besucher laufen über Cloudflare). Ein
+gesonderter Vertragsabschluss ist nicht nötig; das DPA selbst bestätigt dieselbe
+Struktur („Cloudflare … and the counterparty … have entered into an Enterprise
+Subscription Agreement, Self-Serve Subscription Agreement or other written or
+electronic agreement“, https://www.cloudflare.com/cloudflare-customer-dpa/,
+abgerufen 22.09.2026).
+
+**2. EU-US Data Privacy Framework – ist Cloudflare, Inc. aktiv gelistet?**
+
+Ja, belegt, mit einer Präzisierung. Die Volltextsuche im amtlichen Teilnehmerregister
+(https://www.dataprivacyframework.gov/list, Suche „Cloudflare“) wurde über den
+eingebauten Browser in einem eigenen, neuen Tab durchgeführt (nicht im Tab „seed“),
+der Tab wurde danach geschlossen. Ergebnis, ein Treffer:
+
+> „Cloudflare, Inc. — San Francisco, CA — EU-U.S. Data Privacy Framework: Active -
+> Re-certification under Review; Swiss-U.S. Data Privacy Framework: Active -
+> Re-certification under Review; UK Extension to the EU-U.S. Data Privacy Framework:
+> Active - Re-certification under Review“
+> — dataprivacyframework.gov/list (Teilnehmersuche „Cloudflare“), abgerufen
+> 22.09.2026
+
+Cloudflare ist also gelistet, aber aktuell nicht mit schlichtem Status „Active“,
+sondern „Active – Re-certification under Review“ (laufende Rezertifizierung, Teilnahme
+nicht erloschen). Der öffentliche Text sollte diesen Status korrekt wiedergeben statt
+pauschal „zertifiziert“ zu behaupten.
+
+**3. ManageWP Worker – welche Daten, auch von Website-Besuchern?**
+
+Ja, belegt. ManageWP (eine GoDaddy-Marke) sichert laut eigener Produktbeschreibung
+Dateien und Datenbanktabellen der verbundenen Website (einzelne Dateien/Ordner/Tabellen
+lassen sich ausschließen; Backups liegen verschlüsselt bis zu 90 Tage auf Amazon S3,
+Standort US oder EU wählbar; Quelle: managewp.com/features/backup/ und
+managewp.com/guide/backup/, abgerufen 22.09.2026). Zur Besucherdaten-Frage:
+
+> „Our Privacy policy does not technically cover your end-users or site visitors.“
+> — managewp.com/blog/managewp-and-gdpr-compliance, Abschnitt „Data Processing
+> Addendum (DPA)“, abgerufen 22.09.2026
+
+Ergänzend: „ManageWP is a GoDaddy brand. GoDaddy's Global Privacy Notice and the
+following related policies and procedures apply to ManageWP processing of Personal
+Data“ (managewp.com/privacy-policy/, abgerufen 22.09.2026). ManageWP behandelt also
+den Website-Betreiber als Kunden und sich selbst ausdrücklich nicht als Verarbeiter
+von Besucher-/Endnutzerdaten. Rein technisch enthält ein Datenbank-Backup trotzdem
+alles, was in der Datenbank steht; da schmolengruber.at laut Abschnitt 1.2 keine
+Formulare, Cookies oder Nutzerkonten hat, stehen dort aktuell auch keine Besucherdaten,
+die ManageWP sichern könnte.
+
+**4. Imagify – welche Daten, Besucherdaten ja/nein?**
+
+Teilweise belegt. Laut Imagify-FAQ werden bei der Optimierung ausschließlich die
+Bilddateien selbst an Server von WP Media übertragen und dort nur kurz
+zwischengespeichert:
+
+> „The image optimization process is performed on our servers. Once done, Imagify
+> returns the optimized image to your server.“
+> „images sent via the API or WordPress plugin are stored for one hour on our
+> server“
+> „We do not edit images' title or any other information“
+> — imagify.io/faq/, abgerufen 22.09.2026
+
+Eine ausdrückliche Aussage von WP Media/Imagify selbst, dass grundsätzlich „keine
+Besucherdaten“ verarbeitet werden, konnte ich auf einer offiziellen Seite nicht
+wörtlich finden (die Privacy-Policy-Seite von Imagify ist an dieser Stelle
+unspezifisch) – dieser Teil bleibt also nicht durch eine ausdrückliche
+Anbieter-Aussage belegt. Da laut FAQ nur Bilddateien übertragen werden (keine
+Formular- oder Trackingdaten) und diese Website laut Abschnitt 1.2 ohnehin keine
+Besucherdaten erhebt, die in ein Bild einfließen könnten, ist die praktische
+Schlussfolgerung „keine Besucherdaten“ für diese Website aber tragfähig.
 
 ---
 
@@ -197,15 +294,20 @@ zu verschlüsseln. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO
 erreichbaren Website).
 
 Da Cloudflare, Inc. seinen Sitz in den USA hat, ist eine Verarbeitung
-außerhalb der EU/des EWR möglich (Drittlandübermittlung). Cloudflare gibt
-in seiner eigenen Datenschutzerklärung an, sich beim US-Handelsministerium
-zum EU-U.S. Data Privacy Framework zertifiziert zu haben, und verweist
-hilfsweise auf EU-Standardvertragsklauseln
-(Quelle: cloudflare.com/privacypolicy, abgerufen am 22.09.2026).
+außerhalb der EU/des EWR möglich (Drittlandübermittlung). Cloudflare, Inc. ist
+im offiziellen Teilnehmerregister des EU-U.S. Data Privacy Framework als
+Teilnehmer für das EU-U.S. Data Privacy Framework, das Swiss-U.S. Data Privacy
+Framework und die UK-Erweiterung gelistet (Status dort: „Active –
+Re-certification under Review“, also mit laufender, aber nicht erloschener
+Zertifizierung). Hilfsweise verweist Cloudflare in seinen Vertragsunterlagen
+zusätzlich auf EU-Standardvertragsklauseln.
 
-`[OFFEN: Ob mit Cloudflare, Inc. ein Auftragsverarbeitungsvertrag (Art. 28
-DSGVO) abgeschlossen bzw. Cloudflares Standard-Auftragsverarbeitungsvertrag
-akzeptiert wurde, konnte im Rahmen dieser Messung nicht überprüft werden.]`
+Mit Cloudflare, Inc. besteht außerdem ein Auftragsverarbeitungsvertrag nach
+Art. 28 DSGVO: Cloudflares Standard-Auftragsverarbeitungsvertrag (Data
+Processing Addendum) ist laut Cloudflares eigenen Nutzungsbedingungen
+automatisch Bestandteil des mit uns bestehenden Vertrags, sobald
+personenbezogene Daten verarbeitet werden – ein gesonderter Abschluss ist
+nicht erforderlich.
 
 **E-Mail-Adressen-Schutz.** Um die auf dieser Website angezeigte
 E-Mail-Adresse vor dem automatisierten Auslesen durch Spam-Bots zu
@@ -268,10 +370,18 @@ Für Aufbau, Wartung und Absicherung dieser Website setzen wir außerdem
 ein: das Theme bzw. den Page-Builder Avada/Fusion Builder, das
 Wartungswerkzeug ManageWP Worker sowie die Bildoptimierung Imagify.
 
-`[OFFEN: Ob ManageWP Worker und/oder Imagify im Rahmen ihrer Funktion
-personenbezogene Besucherdaten (z. B. IP-Adressen beim Laden von
-Ressourcen) verarbeiten, oder ausschließlich Administrationsdaten des
-Website-Betreibers, war im Rahmen dieser Messung nicht feststellbar.]`
+ManageWP Worker (GoDaddy) erstellt im Rahmen der Website-Wartung
+verschlüsselte Sicherungskopien der Website (Dateien und Datenbank) und
+überträgt diese an ManageWP. Nach Angaben von ManageWP deckt deren eigene
+Datenschutzrichtlinie Website-Besucher ausdrücklich nicht ab, sondern nur
+unsere Daten als Kunde des Dienstes; diese Website hat zudem – wie oben
+beschrieben – weder Formulare noch Cookies noch Nutzerkonten, sodass in den
+gesicherten Daten auch keine Besucherdaten enthalten sind.
+
+Imagify (WP Media) optimiert Bilddateien dieser Website auf eigenen
+Servern. Übertragen werden dabei ausschließlich die Bilddateien selbst;
+sie werden nach der Optimierung innerhalb einer Stunde wieder vom
+Imagify-Server gelöscht. Besucherdaten sind daran nicht beteiligt.
 
 #### Externe Links
 
@@ -293,7 +403,7 @@ bekannt, in den jeweiligen Abschnitten oben genannt.
 | Empfänger | Zweck | Sitz | Rechtsgrundlage |
 |---|---|---|---|
 | move1 e.U. | Hosting, E-Mail | Österreich (Gänserndorf) | Art. 6 Abs. 1 lit. f DSGVO; AVV: `[OFFEN]` |
-| Cloudflare, Inc. | Angriffsschutz, CDN | USA (Drittland) | Art. 6 Abs. 1 lit. f DSGVO; Data Privacy Framework laut Cloudflare; AVV: `[OFFEN]` |
+| Cloudflare, Inc. | Angriffsschutz, CDN | USA (Drittland) | Art. 6 Abs. 1 lit. f DSGVO; Data Privacy Framework (Status: Active – Re-certification under Review); AVV automatisch Bestandteil der Nutzungsbedingungen |
 
 #### Änderungen dieser Datenschutzerklärung
 
@@ -306,27 +416,28 @@ Stand: 22. September 2026
 
 ## 4. Offene Fragen für Andreas
 
-1. **Cloudflare-AVV:** Besteht mit Cloudflare, Inc. ein
-   Auftragsverarbeitungsvertrag bzw. wurde Cloudflares Standard-DPA im
-   Dashboard akzeptiert? Cloudflare bietet dafür ein eigenes Standard-DPA an.
-2. **move1-AVV:** Besteht mit move1 e.U. ein schriftlicher
+**Bereits recherchiert und belegt (Abschnitt 1.3), nur noch zur Kenntnisnahme:**
+
+1. ~~Cloudflare-AVV~~ — geklärt: automatisch Bestandteil der Nutzungsbedingungen,
+   kein gesonderter Abschluss nötig (Abschnitt 1.3, Punkt 1).
+2. ~~DPF-Zertifizierung offiziell gegenprüfen~~ — geklärt: im amtlichen Register
+   gelistet, Status „Active – Re-certification under Review“ (Abschnitt 1.3,
+   Punkt 2).
+3. ~~ManageWP Worker / Imagify~~ — geklärt, so weit von außen über offizielle
+   Anbieterquellen feststellbar (Abschnitt 1.3, Punkte 3 und 4).
+
+**Weiterhin offen, nur move1 kann sie beantworten (Mailentwurf vorbereitet, siehe
+Abschnitt 6):**
+
+4. **move1-AVV:** Besteht mit move1 e.U. ein schriftlicher
    Auftragsverarbeitungsvertrag nach Art. 28 DSGVO?
-3. **Log-Speicherdauer bei move1:** Wie lange werden Server-Logfiles bei
+5. **Log-Speicherdauer bei move1:** Wie lange werden Server-Logfiles bei
    move1 konkret gespeichert? Die aktuelle Live-Fassung nennt hierzu nur
    einen generischen, nicht verifizierten Platzhalterwert („in der Regel 2
    Wochen“), den ich nicht ungeprüft übernehmen wollte.
-4. **ManageWP Worker / Imagify:** Verarbeiten diese beiden Tools
-   personenbezogene Besucherdaten (z. B. IP-Adressen), oder ausschließlich
-   Administrationsdaten des Betreibers? Das lässt sich von außen nicht
-   messen, sondern nur über die Tool-Konfiguration bzw. deren
-   Datenschutzerklärungen klären.
-5. **DPF-Zertifizierung offiziell gegenprüfen:** Ich habe Cloudflares
-   Data-Privacy-Framework-Zertifizierung nur über Cloudflares eigene
-   Datenschutzerklärung belegen können; die Volltextsuche im offiziellen
-   Register (dataprivacyframework.gov/s/participant-search) ist
-   JavaScript-basiert und für mich nicht automatisiert abrufbar. Eine
-   manuelle Gegenprobe dort wäre sauberer, bevor der Text veröffentlicht
-   wird.
+
+**Weiterhin offen, unabhängig von move1:**
+
 6. **Verzeichnis von Verarbeitungstätigkeiten (VVT):** Falls es intern
    bereits ein VVT gibt, sollte dieser Entwurf damit abgeglichen werden.
 
