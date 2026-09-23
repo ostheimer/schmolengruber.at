@@ -359,3 +359,63 @@ Vergleichswert 22.09. für `/` (13.5.0, 3 Läufe, laut Auftrag): LCP 3,9 s, FCP 
 - Sichtprüfung per Headless-Chrome-CLI, keine echten Geräte.
 
 final result: failed
+
+## Avada-CSS als Datei – 23. September 2026
+
+### Diagnose
+
+Avada-Systemstatus (`avada-status`) liefert nur Versionshistorie, Umgebungs- und Plugin-Daten, keine eigene Dynamic-CSS-Diagnose. Die relevanten Angaben liegen in Avada → Optionen → Leistung → Dynamisches CSS & JS: `fusion_options[css_cache_method]` ist per DOM-Wert bestätigt auf `file` gesetzt (Radio-Button „Datei" aktiv, kein UI-Fake). Im selben Bereich zeigt der JS-Compiler-Hinweis unverändert: „**IMPORTANT NOTE: JS Compiler is disabled. File does not exist or access is restricted.**" Für den CSS-Compiler gibt es keinen gleichwertigen Text-Hinweis in der UI, das Verhalten (stiller Fallback auf Inline, nie eine Datei) ist aber identisch.
+
+`wp-content/uploads/fusion-styles/` und `wp-content/uploads/fusion-scripts/` antworten beide mit HTTP 404 (curl, anonym). Website-Zustand → Bericht → Dateisystem-Berechtigungen meldet WP-Hauptverzeichnis, `wp-content`, Uploads-, Plugins-, Themes- und Must-Use-Plugins-Verzeichnis als „Beschreibbar"; nur das Schriften-Verzeichnis „Existiert nicht" (nicht betroffen). Damit ist die Grundvoraussetzung für den Beschreibbar-Zweig erfüllt – die übergeordneten Verzeichnisse sind schreibbar, nur die konkreten Unterordner `fusion-styles`/`fusion-scripts` entstehen nie.
+
+WordPress-Kern 6.8.10, PHP 8.4.11, Avada 7.16.1 (Avada Builder 3.16.1, Avada Core 5.16.1), WP Rocket 3.23.3.3.
+
+### Eingriff
+
+Gemäß Auftrag nur die eine Avada-Option angefasst, sonst nichts:
+
+1. `css_cache_method` auf **Datenbank** gestellt, gespeichert, nach Seiten-Reload per DOM-Wert verifiziert (`checked: db = true`).
+2. Unmittelbar danach zurück auf **Datei** gestellt, gespeichert, nach Reload erneut verifiziert (`checked: file = true`).
+3. Aus dem Kontext von `#wpadminbar` per `fetch` `action=purge_cache&type=all` und `action=rocket_clean_saas` mit den echten, aus der Seite gelesenen Nonces aufgerufen – beide HTTP 200 mit Redirect zurück auf die Referrer-Seite.
+4. Alle 11 Sitemap-Seiten (`wp-sitemap-posts-page-1.xml`) anonym per curl abgerufen, je mit mobilem und Desktop-UA (22 Requests, alle HTTP 200).
+5. Kontrollschleife auf `/pelletskessel/` über 30 Minuten in 5-Minuten-Abständen (Hintergrundprozess, kein Sekundentakt): `wpr-usedcss` erscheint ab Minute 5 wieder zuverlässig (~201–212 KB je nach Seite) – die WP-Rocket-Pipeline selbst funktioniert. Der Avada-Inline-Block bleibt über alle sieben Messpunkte hinweg vorhanden und byteidentisch (1.423.481–1.423.508 B roh, Schwankung im Rahmen normaler dynamischer Inhalte), kein `<link>` auf eine fusion-styles-Datei zu keinem Zeitpunkt.
+
+Keine sichtbar kaputte Seite danach (volles Avada-Inline-CSS bleibt ja erhalten), daher kein zusätzlicher WP-Rocket-Cache-Reset nötig.
+
+### Vorher/Nachher
+
+| Seite | UA | Übertragen vorher | Übertragen nachher | Roh vorher | Roh nachher | Avada-Inline vorher | Avada-Inline nachher | wpr-usedcss vorher | wpr-usedcss nachher |
+|---|---|---|---|---|---|---|---|---|---|
+| `/` | mobil | 197.280 B | 197.497 B | 1.468.134 B | 1.468.134 B | 1.118.924 B | 1.118.924 B | 212.283 B | 212.283 B |
+| `/` | desktop | 183.317 B | 183.546 B | 1.270.583 B | 1.270.583 B | 1.118.924 B | 1.118.924 B | nicht vorhanden | nicht vorhanden |
+| `/pelletskessel/` | mobil | 192.680 B | 192.719 B | 1.423.508 B | 1.423.508 B | 1.118.930 B | 1.118.930 B | 201.766 B | 201.766 B |
+| `/pelletskessel/` | desktop | 193.711 B | 194.046 B | 1.423.188 B | 1.423.188 B | 1.118.930 B | 1.118.930 B | 201.458 B | 201.458 B |
+
+Rohgröße und Avada-Inline-CSS-Länge sind vorher/nachher in jeder Zeile exakt gleich; nur die br-komprimierte Übertragungsgröße schwankt um 200–300 B, normales Kompressionsrauschen. Weder vorher noch nachher ein `<link rel="stylesheet">` auf eine kompilierte Avada-Datei im `<head>`. Auffällig: `wpr-usedcss` fehlt auf der Desktop-Variante von `/` durchgehend (vorher wie nachher) – ein bestehendes, vom heutigen Eingriff unabhängiges Verhalten, nicht weiter untersucht, da außerhalb des Auftragsumfangs.
+
+### Sichtprüfung
+
+Anonyme Screenshots (Headless Chrome, frisches Profil je Aufnahme) von `/` und `/pelletskessel/` bei 1440 × 900 und 390 × 844: Header, Navigation, Hero/Bild und Leistungskarten zeigen auf beiden 1440-Aufnahmen keine fehlenden Stile. Bei 390 × 844 wirken Navigationseinträge und Textzeilen am rechten Rand abgeschnitten – exakt dasselbe Bild wie im Eintrag vom 22./23.9., dort bereits als Artefakt des `--screenshot`-CLI-Flags identifiziert und per `scrollWidth`/`clientWidth`-Gegenprobe im Browser-Pane widerlegt (kein echter horizontaler Überlauf). Diese Gegenprobe wurde heute nicht wiederholt, da unverändert derselbe bekannte Effekt.
+
+### Lighthouse mobil, v13.5.0, je 3 Läufe
+
+| Seite | Score (Median) | LCP (Median) | FCP (Median) | Dokumentgröße (Median, `total-byte-weight`) |
+|---|---|---|---|---|
+| `/` | 0,86 | 3,96 s | 2,04 s | 574,5 KB |
+| `/waermepumpen/` | 0,84 | 4,28 s | 1,97 s | 569,8 KB |
+
+Vergleichswert 22.09. (Auftrag): Startseite Score 0,87 / LCP 3,90 s / FCP 1,95 s; Wärmepumpen Score 0,83 / LCP 4,49 s. Die heutigen Werte liegen innerhalb der üblichen Lauf-zu-Lauf-Schwankung um diese Referenz – keine messbare Verbesserung durch den Eingriff, wie angesichts der byteidentischen Vorher/Nachher-Werte zu erwarten war.
+
+### Support-Anfragen (Entwürfe, nicht gesendet)
+
+Vollständiger Text beider Anfragen in `/private/tmp/claude-501/-Users-andreas-GitHub-schmolengruber-at/727ce70c-d468-4e69-8378-0b38932a3fe5/scratchpad/avada-file/support-texts.txt` und im Bericht an den Auftraggeber. Kurzfassung: WP Rocket – RUCSS erzeugt Used CSS korrekt, entfernt aber Avadas Inline-Block nicht mehr, Verweis auf das ähnliche Issue wp-media/wp-rocket#5980. ThemeFusion – Dynamic CSS bleibt trotz „File"-Modus inline, `fusion-styles`/`fusion-scripts` entstehen nie, obwohl das übergeordnete Uploads-Verzeichnis laut Website-Zustand beschreibbar ist; Frage nach der genauen Schreibrechte-Prüfung und einem Debug-Weg.
+
+### Grenzen
+
+- Der Eingriff hat die Ursache nicht behoben, wie schon beim Versuch vom 22./23.9. mit `fusion_reset_all_caches`. Zwei unabhängige Mechanismen (kompletter Avada-Cache-Reset und gezielter Datenbank→Datei-Sprung der Compiling-Methode) haben beide keine Datei erzeugt – das spricht für ein strukturelles Schreibproblem auf Avada-Seite, nicht für einen reinen Cache-Stand.
+- Kein FTP/SSH-Zugriff in dieser Session; Website-Zustand prüft nur das übergeordnete Uploads-Verzeichnis, nicht die konkreten (fehlenden) Unterordner `fusion-styles`/`fusion-scripts`.
+- Laut Auftrag ausschließlich die eine Avada-Option angefasst – kein erneuter „Alle Avada Caches zurücksetzen", keine anderen Plugins oder Optionen ausprobiert.
+- Kein Zugriff auf Server- oder PHP-Fehlerprotokolle zur Bestätigung der genauen Fehlerursache.
+- Sichtprüfung per Headless-Chrome-CLI, keine echten Geräte; die 390-px-Auffälligkeit wurde als bekanntes Artefakt eingestuft, aber heute nicht erneut per Gegenprobe verifiziert.
+
+final result: failed
