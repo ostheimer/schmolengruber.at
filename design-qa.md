@@ -419,3 +419,30 @@ Vollständiger Text beider Anfragen in `/private/tmp/claude-501/-Users-andreas-G
 - Sichtprüfung per Headless-Chrome-CLI, keine echten Geräte; die 390-px-Auffälligkeit wurde als bekanntes Artefakt eingestuft, aber heute nicht erneut per Gegenprobe verifiziert.
 
 final result: failed
+
+## Support-Anfragen und Herkunft der Updates – 24./25. September 2026
+
+Bezug: Issue #6 (Avada-CSS 1,1 MB inline, WP Rocket entfernt es seit 22.09. nicht mehr).
+
+### Support-Anfragen
+
+- **Avada:** am 24.09.2026 über My Avada → Submit a Ticket abgeschickt, Bestätigung „Your ticket has been submitted.“. Version 7.16.1, Seite und Website https://www.schmolengruber.at/, Hosting „move1 (Austria), Apache“, Nachricht wie in #6. WordPress- und FTP-Zugangsdaten bewusst nicht mitgeschickt.
+- **WP Rocket:** am 24.09.2026 über das Help-Center-Formular abgeschickt, Thema „I'm having trouble with Remove Unused CSS“, Website schmolengruber.at aus dem Kundenkonto. Bestätigung „Thank you! … normally within 24 hours“. Das reCAPTCHA hat Andreas selbst gelöst.
+- Stand 25.09.: In office@ostheimer.at und im Gmail-Konto ist weder eine Eingangsbestätigung noch eine Antwort von WP Rocket oder Avada angekommen. Die Kundenkonten laufen offenbar auf eine andere Adresse.
+
+### Herkunft der Updates vom 22.09.
+
+Die WordPress-Auto-Updates sind für Avada, Avada Builder/Core und WP Rocket ausgeschaltet (Plugins-Liste und Themes-Daten im Admin gelesen). Der ManageWP-Verlauf (Konto office@ostheimer.at) zeigt, Ortszeit:
+
+| Uhrzeit | Aktion |
+|---|---|
+| 20:54 | WP Rocket 3.23.1 → 3.23.3.3 und Imagify 2.3.0 → 2.3.4 über ManageWP |
+| 21:07 | Manuelle ManageWP-Sicherung „Vor Avada 7.16.1 2026-09-22“ (A1-Anschluss) |
+| 21:08:47 | Avada-Theme-Dateien neu geschrieben, Update auf 7.16.1 außerhalb von ManageWP |
+| 21:48 | Twenty Twenty-Four 1.5 → 1.6 über ManageWP |
+
+Folgerung: Die Startseite war nach dem WP-Rocket-Update laut Lighthouse noch ~60 KB groß und wurde erst nach dem Avada-Update ~200 KB. Das spricht für Avada 7.16.1 als Auslöser, ist aber nicht bewiesen. Die ManageWP-Sicherung von 21:07 ist ein Rückweg auf Avada 7.15.6; ein Restore würde alles seit dem 22.09. abends zurücksetzen und käme nur als Test auf einer Kopie oder mit ausdrücklicher Freigabe in Frage.
+
+Offen: Antworten beider Hersteller, Antwort von move1 zu Auftragsverarbeitungsvertrag und Log-Speicherdauer (Mail am 23.09. gesendet).
+
+final result: pending
