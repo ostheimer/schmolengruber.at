@@ -1,3 +1,9 @@
+**Veröffentlicht am 28.09.2026 auf /datenschutzerklaerung/ (Revision vorher: 700).**
+Details und Readback siehe `design-qa.md`, Abschnitt „Neue Datenschutzerklärung –
+28. September 2026". Das Stand-Datum im veröffentlichten Text wurde auf
+„28. September 2026" gesetzt (abweichend vom „22. September 2026" im Entwurf
+unten).
+
 # Entwurf: Datenschutzerklärung (Stand September 2026)
 
 Dieses Dokument ist eine Arbeitsgrundlage für Andreas Ostheimer, kein

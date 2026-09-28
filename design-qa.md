@@ -446,3 +446,88 @@ Folgerung: Die Startseite war nach dem WP-Rocket-Update laut Lighthouse noch ~60
 Offen: Antworten beider Hersteller, Antwort von move1 zu Auftragsverarbeitungsvertrag und Log-Speicherdauer (Mail am 23.09. gesendet).
 
 final result: pending
+
+## Neue Datenschutzerklärung – 28. September 2026
+
+Auftrag: den freigegebenen Entwurf aus `docs/datenschutz-entwurf-2026-09.md`
+(nur Abschnitt 3 „Vollständiger Entwurf") auf Seite 183
+(`/datenschutzerklaerung/`) veröffentlichen. Nichts anderes an der Seite
+geändert; Meta-Description (Ostheimer SEO) unangetastet gelassen.
+
+### Ersetzt
+
+Vorheriger Rohinhalt (88.974 Zeichen, AdSimple-Generatortext) vollständig
+ersetzt. Struktur wie bisher übernommen: `fusion_builder_container` →
+`fusion_builder_row` → `fusion_builder_column` mit unverändertem
+`[fusion_title size="1"]Datenschutzerklärung[/fusion_title]` (die einzige H1
+der Seite) und einem neuen `fusion_text`-Inhalt (19.267 Zeichen) nach
+demselben Markup-Muster wie das Impressum (h2-Abschnitte, `<p>`, `<a>`,
+`mailto:`/`tel:`-Links, eine HTML-Tabelle). Backup des alten Rohinhalts unter
+`/private/tmp/claude-501/-Users-andreas-GitHub-schmolengruber-at/727ce70c-d468-4e69-8378-0b38932a3fe5/scratchpad/dse/before-183.txt`,
+Revision vor der Änderung: ID 700 (9.9.2026, 11:29 Uhr). Speichern per
+`POST /wp-json/wp/v2/pages/183`, beide Male HTTP 200. Cache über
+`#wpadminbar`-Links (`purge_cache&type=all`, `rocket_clean_saas`) geleert,
+jeweils HTTP 200.
+
+### Readback (anonym, curl, `Mozilla/5.0`, ohne Query-Parameter)
+
+| Prüfung | Erwartet | Ergebnis |
+|---|---|---|
+| `/datenschutzerklaerung/` HTTP-Status | 200 | 200 |
+| `/impressum/` HTTP-Status | 200 | 200 |
+| `/` HTTP-Status | 200 | 200 |
+| Anzahl `<h1` | genau 1 | 1 (aus dem unveränderten `fusion_title`) |
+| Anzahl `<meta name="description"` | genau 1 | 0 |
+| „Cloudflare" im Text | vorhanden | vorhanden |
+| „Google Analytics" | 0× | 0× |
+| „adsimple" | 0× | 0× |
+| „[OFFEN" | 0× | 0× |
+| `<img>` mit externer Quelle im Hauptinhalt | keine | keine (0 `<img>` im Hauptinhalt; die 3 `<img>` der Seite sind das Logo im Header, gleiche Domain) |
+| Links im Hauptinhalt ohne 4xx/5xx | alle | `tel:`-Links nicht per HTTP prüfbar; `/impressum/` 200; `https://policies.google.com/privacy` 200 (HEAD); die beiden `/cdn-cgi/l/email-protection#…`-Links (Cloudflares E-Mail-Verschleierung für die neuen `mailto:`-Adressen) antworten mit 404 auf direkten `curl`-Aufruf – Gegenprobe auf `/impressum/` zeigt exakt dasselbe Verhalten für dessen eigenen, unveränderten `mailto:`-Link; das ist der normale, aus Abschnitt 1 des Entwurfs bekannte clientseitige Cloudflare-Mechanismus (funktioniert nur mit JS-Decoder im echten Browser), kein defekter Link |
+
+Die fehlende Meta-Description ist keine Regression: `<meta name="description"`
+fehlt auch auf `/impressum/` und fehlte schon vorher auf Seite 183 (geprüft an
+den vor der Änderung gespeicherten Rohfassungen) – das SEO-Plugin liefert für
+keine der beiden Seiten eine, unabhängig von diesem Eingriff. Nicht verändert,
+also auftragsgemäß „unverändert gelassen".
+
+### Sichtprüfung
+
+Anonyme Screenshots (Headless Chrome, frisches Profil) bei 1440 × 900 und
+390 × 844 stimmen im Kopfbereich (Überschriftengrößen, Abstände, Typografie)
+sichtbar mit dem gleich aufgebauten Impressum überein. Eine erste
+390-px-Aufnahme zeigte Überschriften und Tabellenzellen am rechten Rand
+abgeschnitten; Gegenprobe im Browser-Pane
+(`document.documentElement.scrollWidth === clientWidth === 390`) bestätigte
+für die Überschriften den bereits im Eintrag „Avada-CSS-Regression" vom
+22./23.9. dokumentierten Artefakt-Effekt des `--screenshot`-CLI-Flags (kein
+echter Seitenüberlauf). Für die Tabelle ergab dieselbe Gegenprobe jedoch einen
+echten Befund: `body { overflow-x: hidden }` schnitt die 652 px breite Tabelle
+in einem nur 330 px breiten Spaltenbereich sichtbar ab (rechter Tabellenrand
+bei x = 682 gegenüber 390 px Viewportbreite), statt sie scrollbar zu machen.
+Korrektur: Tabelle in `<div style="overflow-x:auto; max-width:100%;
+-webkit-overflow-scrolling:touch;"><table style="min-width:600px;">…`
+gewrappt, erneut gespeichert (19.267 Zeichen) und Cache erneut geleert.
+Erneute Prüfung im Browser-Pane bei 390 × 812: Wrapper hat jetzt
+`overflow-x:auto`, `clientWidth 330` gegen `scrollWidth 652`, die Seite selbst
+bleibt bei `scrollWidth === clientWidth === 390` – kein Seitenüberlauf mehr,
+Tabelle ist innerhalb ihres eigenen Rahmens waagrecht scrollbar (Scrollleiste
+sichtbar, Kopfzeilen „Empfänger/Zweck/Sitz/Rechtsgrundlage" und beide Zeilen
+per Scroll vollständig erreichbar).
+
+### Rückweg
+
+Nicht benötigt. Für den Fall: `POST
+/wp-json/wp/v2/pages/183/revisions/700/restore` oder Zurückschreiben von
+`before-183.txt` per `POST /wp-json/wp/v2/pages/183`, danach Cache leeren.
+
+### Grenzen
+
+- Keine automatische Prüfung, ob externe Links (`policies.google.com`) dauerhaft
+  erreichbar bleiben; nur Momentaufnahme.
+- Sichtprüfung per Headless-Chrome-CLI und Browser-Pane-Emulation, kein Test
+  auf einem physischen Gerät.
+- Fehlende Meta-Description nicht behoben (außerhalb des Auftrags – nur Seite
+  183, nicht das SEO-Plugin).
+
+final result: passed
