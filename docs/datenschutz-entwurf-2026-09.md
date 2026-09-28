@@ -15,6 +15,13 @@ offizieller Quellen recherchiert und belegt (siehe Abschnitt 1.3). Die Punkte
 „AVV mit move1" und „Log-Speicherdauer bei move1" bleiben offen, da sie nur move1
 selbst beantworten kann (siehe Abschnitt 6, Mailentwurf vorbereitet).
 
+**Nachtrag 28.09.2026:** Mario Müllner (move1) hat am 25.09.2026 per Mail
+geantwortet: Ein Auftragsverarbeitungsvertrag besteht („AVV gibt's“), und die
+Webserver-Zugriffslogs werden 14 Tage aufbewahrt, im Anlassfall auch länger.
+Beide Stellen sind im Entwurf eingearbeitet. Das AVV-Dokument selbst liegt uns
+nicht vor; ob es mit der Schmolengruber Installationen GmbH als Verantwortlicher
+geschlossen ist, sollte bei Gelegenheit mit einer Kopie belegt werden.
+
 ---
 
 ## 1. Messung und Abgleichstabelle
@@ -276,8 +283,9 @@ Bereitstellung der Website, der Fehleranalyse und der IT-Sicherheit.
 Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an
 einem sicheren und stabilen Betrieb unserer Website).
 
-`[OFFEN: Wie lange move1 diese Server-Logfiles konkret speichert, ist uns
-aktuell nicht bekannt und sollte bei move1 nachgefragt werden.]`
+Die Server-Logfiles werden beim Hoster 14 Tage aufbewahrt und danach
+gelöscht. Ist ein sicherheitsrelevanter Vorfall aufzuklären, können einzelne
+Logdaten bis zum Abschluss der Klärung länger gespeichert werden.
 
 #### Cloudflare (vorgeschalteter Schutz- und Auslieferungsdienst)
 
@@ -402,7 +410,7 @@ bekannt, in den jeweiligen Abschnitten oben genannt.
 
 | Empfänger | Zweck | Sitz | Rechtsgrundlage |
 |---|---|---|---|
-| move1 e.U. | Hosting, E-Mail | Österreich (Gänserndorf) | Art. 6 Abs. 1 lit. f DSGVO; AVV: `[OFFEN]` |
+| move1 e.U. | Hosting, E-Mail | Österreich (Gänserndorf) | Art. 6 Abs. 1 lit. f DSGVO; Auftragsverarbeitungsvertrag besteht |
 | Cloudflare, Inc. | Angriffsschutz, CDN | USA (Drittland) | Art. 6 Abs. 1 lit. f DSGVO; Data Privacy Framework (Status: Active – Re-certification under Review); AVV automatisch Bestandteil der Nutzungsbedingungen |
 
 #### Änderungen dieser Datenschutzerklärung
@@ -429,12 +437,11 @@ Stand: 22. September 2026
 **Weiterhin offen, nur move1 kann sie beantworten (Mailentwurf vorbereitet, siehe
 Abschnitt 6):**
 
-4. **move1-AVV:** Besteht mit move1 e.U. ein schriftlicher
-   Auftragsverarbeitungsvertrag nach Art. 28 DSGVO?
-5. **Log-Speicherdauer bei move1:** Wie lange werden Server-Logfiles bei
-   move1 konkret gespeichert? Die aktuelle Live-Fassung nennt hierzu nur
-   einen generischen, nicht verifizierten Platzhalterwert („in der Regel 2
-   Wochen“), den ich nicht ungeprüft übernehmen wollte.
+4. ~~**move1-AVV**~~ — geklärt: laut move1 (Mail vom 25.09.2026) besteht ein
+   Auftragsverarbeitungsvertrag. Eine Kopie liegt noch nicht vor.
+5. ~~**Log-Speicherdauer bei move1**~~ — geklärt: 14 Tage, im Anlassfall
+   länger (Mail vom 25.09.2026). Der alte Platzhalter „in der Regel 2 Wochen“
+   war damit zufällig richtig, ist aber jetzt belegt.
 
 **Weiterhin offen, unabhängig von move1:**
 
