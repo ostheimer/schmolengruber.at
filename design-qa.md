@@ -530,4 +530,77 @@ Nicht benötigt. Für den Fall: `POST
 - Fehlende Meta-Description nicht behoben (außerhalb des Auftrags – nur Seite
   183, nicht das SEO-Plugin).
 
+### Nachtrag 29.09.2026: erneut veröffentlicht auf web02
+
+29.09.: auf dem richtigen Server (web02) erneut veröffentlicht, weil die
+Veröffentlichung vom 28.09. auf einem veralteten Server hinter derselben IP
+gelandet war. Die Angaben zu Revision, Readback und Meta-Description im
+Eintrag vom 28.09. oben beziehen sich auf jenen Server. Der Stand dort wurde
+am 29.09. weder geprüft noch verändert.
+
+**Vorher (web02, 29.09. vor dem Eingriff):** `x-host: web02`, Seite 183
+`modified` 2026-09-09T11:29:41, jüngste Revision **700**, Rohinhalt
+88.974 Zeichen (AdSimple-Fassung, 223 Treffer „adsimple" in der
+ausgelieferten Seite). Backup des Rohinhalts unter
+`/private/tmp/claude-501/-Users-andreas-GitHub-schmolengruber-at/727ce70c-d468-4e69-8378-0b38932a3fe5/scratchpad/dse/before-183-web02.txt`
+(SHA-256 `daae61a2…0894`, im Browser aus `content.raw` von web02 gebildet und
+mit der Datei abgeglichen; byte-identisch mit `before-183.txt` vom 28.09.).
+
+**Eingriff:** Nur Seite 183, nur `content`, per `POST
+/wp-json/wp/v2/pages/183` (HTTP 200). Neuer Rohinhalt 19.275 Zeichen
+(SHA-256 `4d5670de…64d5`), aus Abschnitt 3 des Entwurfs mit einem Skript
+erzeugt und gegen die Quelle geprüft (Klartext des HTML identisch mit dem
+Quelltext, Stand-Datum „29. September 2026"); Container, Row, Column und das
+bestehende `fusion_title` (einzige H1) unverändert aus dem Altinhalt
+übernommen. Nach dem Speichern per `GET` zurückgelesen: gespeicherter
+Rohinhalt hat denselben SHA-256, `modified` 2026-09-29T21:21:28,
+neue Revision **864**, Meta-Feld `_native_seo_description` unverändert.
+Cache: `purge_cache&type=all` und `rocket_clean_saas` über die
+`#wpadminbar`-Links, beide HTTP 200.
+
+Gegenüber dem Inhalt vom 28.09. drei Abweichungen (sonst gleich):
+Stand-Datum 29.09.; die zwei schließenden Anführungszeichen „…“ sind jetzt
+typografisch wie in der Quelle (am 28.09. gerade `"`); der Link zu Google
+zeigt die volle Adresse `https://policies.google.com/privacy` als Text.
+
+**Readback (anonym, curl, `Mozilla/5.0`, ohne Query-Parameter; zusätzlich
+direkt am Ursprung mit `--resolve www.schmolengruber.at:443:195.202.154.211`):**
+
+| Prüfung | Erwartet | über Cloudflare | direkt am Ursprung |
+|---|---|---|---|
+| `/datenschutzerklaerung/` HTTP-Status | 200 | 200 | 200 |
+| `x-host` | web02 | web02 | web02 |
+| `/` und `/impressum/` HTTP-Status | 200 | 200, 200 | 200, 200 |
+| Anzahl `<h1` | 1 | 1 („Datenschutzerklärung") | 1 |
+| Anzahl `<meta name="description"` | 1 | 1 | 1 |
+| „Cloudflare" | vorhanden | 12× | 12× |
+| „Google Analytics" / „adsimple" / „[OFFEN" | 0× | 0× / 0× / 0× | 0× / 0× / 0× |
+| „Stand: 29. September 2026" | 1× | 1× | 1× |
+| Bilder | keine externen | keine im Hauptinhalt; 3 `<img>` der Seite (Logo) auf eigener Domain, kein externes `src`/`srcset` | gleich |
+| Links im Hauptinhalt | ohne 4xx/5xx | `/impressum/` 200; `https://policies.google.com/privacy` 200 (GET und HEAD); `tel:` nicht per HTTP prüfbar; die zwei `/cdn-cgi/l/email-protection#…`-Links (Cloudflare-Verschleierung) ausgenommen | dort stehen die `mailto:`-Links im Klartext |
+| Klartext Hauptinhalt gegen Entwurf | gleich | – | gleich (8.969 Zeichen) |
+
+Vorher lieferte `/datenschutzerklaerung/` auf web02 ebenfalls genau ein
+`<meta name="description"` (Text aus `_native_seo_description`); die Meta-Description
+wurde nicht angefasst.
+
+**Sichtprüfung:** Headless Chrome, frisches Profil, anonym, bei 1440 × 900
+sowie ganzseitig (Überschriften, Absätze, Links, Tabelle, Stand-Zeile, Footer
+unauffällig; Tabelle ohne Rahmen, der folgende h2 sitzt dicht darunter, wie am
+28.09.) und bei 390 × 844: die CLI-Aufnahme ist am rechten Rand abgeschnitten,
+das bekannte Artefakt des `--screenshot`-Flags (siehe Eintrag vom 22./23.9.).
+Gegenprobe im Browser-Pane bei 390 × 844: `scrollWidth === clientWidth === 390`,
+größter rechter Überschriftenrand 360 px, Tabellenwrapper `overflow-x:auto`
+mit `clientWidth 330` gegen `scrollWidth 652`, also kein Seitenüberlauf und die
+Tabelle im eigenen Rahmen scrollbar. Die Pane-Sitzung war als Admin
+angemeldet (Admin-Leiste sichtbar), der Hauptinhalt ist derselbe.
+
+**Rückweg:** nicht benötigt. Für den Fall: `before-183-web02.txt` per `POST
+/wp-json/wp/v2/pages/183` zurückschreiben (Feld `content`), danach Cache leeren.
+
+**Grenzen:** Kein Test auf einem physischen Gerät; `tel:`-Links und die
+per JavaScript entschlüsselten E-Mail-Links nicht per HTTP prüfbar; externe
+Links nur als Momentaufnahme; Cloudflare-Edge nicht gesondert geleert
+(`cf-cache-status: DYNAMIC`, HTML wird dort nicht zwischengespeichert).
+
 final result: passed
