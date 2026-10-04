@@ -604,3 +604,89 @@ Links nur als Momentaufnahme; Cloudflare-Edge nicht gesondert geleert
 (`cf-cache-status: DYNAMIC`, HTML wird dort nicht zwischengespeichert).
 
 final result: passed
+
+## Avada-Test: WP Rocket Optimize CSS Delivery – 4. Oktober 2026
+
+Bezug: Issue #6, Avada-Support-Ticket 3461539988 (Vorschlag: in WP Rocket → Dateioptimierung „Optimize CSS Delivery“ ausschalten und prüfen, ob das Problem bleibt). Test von Andreas freigegeben. Zeiten Ortszeit, Messungen anonym per curl mit mobilem UA (Pixel 5), Arbeitsdateien im Scratchpad `avada-test/`.
+
+### Befund
+
+**Ausgeschaltet schreibt Avada seine CSS-Datei, eingeschaltet nicht.** Mit „Optimize CSS Delivery“ aus (und Seiten- sowie Avada-Cache geleert) liefert die Startseite einen `<link>` auf `/wp-content/uploads/fusion-styles/692f2f3678f48709066410d85432c3ca.min.css?ver=3.16.1` (HTTP 200) und keinen `fusion-stylesheet-inline-css`-Block mehr; das Verzeichnis `uploads/fusion-styles/` existiert danach (HTTP 403 statt vorher 404). Beim Wiedereinschalten (sonst nichts geändert) gibt Avada schon bei der ersten Anfrage wieder den 1,1-MB-Inline-Block aus und keinen Stylesheet-Link, obwohl die Datei weiter mit 200 erreichbar ist und die Avada-Option weiter auf „Datei“ steht. Das blieb über die gesamte Beobachtung von 30 Minuten (sechs Messpunkte im 5-Minuten-Abstand) unverändert.
+
+Auslöser ist damit `remove_unused_css`: Im Formular war `async_css` schon vorher 0 und `async_css_mobile` blieb unverändert 1. Mit `?nowprocket` (WP Rocket überspringt seine Ausgabeverarbeitung) steht der Inline-Block weiterhin in der Seite (1.118.924 B, kein Link). Das spricht dafür, dass die Entscheidung in Avadas PHP-Ausgabe fällt und nicht in WP Rockets nachträglicher HTML-Verarbeitung; bewiesen ist es damit nicht.
+
+Verzweigung laut Auftrag: **Zweig „Avada schreibt die Datei“**, danach Vergleich beider Zustände. Entscheidung: **Einstellung bleibt an (Ausgangszustand).**
+
+### Ablauf
+
+1. Vorher gelesen (`/wp-admin/options-general.php?page=wprocket`): `optimize_css_delivery` (UI-Checkbox) an, `remove_unused_css=1`, `async_css=0`, `async_css_mobile=1`, Safelist 39 Zeilen (`.sch-header` … `.sch-legacy-mobile`). Rückweg-Datei: `avada-test/baseline-wprocket.txt`.
+2. 09:06 ausgeschaltet: `FormData` des Formulars `#wprocket_options` an `options.php`, nur `remove_unused_css=0`, `async_css=0` gesetzt und die UI-Checkbox weggelassen (wie bei abgewählter Checkbox; die Seite setzt dabei per JS ebenfalls beide Werte auf 0). Nach Neuladen gelesen: Checkbox aus, `remove_unused_css=0`, `async_css=0`, `async_css_mobile=1`, Safelist unverändert 39 Zeilen, 63 statt 64 Formularfelder (nur die Checkbox fehlt).
+3. WP Rocket „Cache leeren und vorladen“ (`purge_cache&type=all`), dann Avada-Cache zurückgesetzt (`fusion_reset_all_caches` mit dem Nonce von `#fusionredux-form-wrapper`, HTTP 200, Rückgabe „0“ wie am 22.09.), danach WP Rocket erneut geleert.
+4. Gemessen (siehe Tabellen), Lighthouse 3 × je Seite.
+5. 09:10 wieder eingeschaltet (`remove_unused_css=1`, `async_css=0`, Checkbox an), nach Neuladen gelesen und verglichen: alle Werte wie in Schritt 1, 64 Felder, Safelist 39 Zeilen. Cache geleert, Messung sofort und danach 30 Minuten lang alle 5 Minuten; Lighthouse 3 × je Seite im Endzustand; Screenshots.
+6. `x-host: web02` vor und nach jedem Speichern/Reset sowie bei jedem Messpunkt (insgesamt über 20 Prüfungen), nie eine Abweichung.
+
+### Messwerte (mobil, Startseite `/` und `/pelletskessel/`)
+
+| Zustand | Seite | Roh | Übertragen (br) | Avada-Inline-CSS | Avada-Datei | `wpr-usedcss` | Stylesheet-Links im Head |
+|---|---|---|---|---|---|---|---|
+| Vorher (an) | `/` | 1.468.134 B | 197.261 B | 1.118.924 B | keine | 212.283 B | 0 |
+| Vorher (an) | `/pelletskessel/` | 1.423.508 B | 193.107 B | 1.118.930 B | keine | 201.766 B | 0 |
+| Aus | `/` | 138.956 B | 28.976 B | 0 | `692f…3ca.min.css`: 200, 1.197.595 B roh, 163.651 B gzip | 0 | 2 (block-library + Avada-Datei) |
+| Aus | `/pelletskessel/` | 105.638 B | 25.554 B | 0 | `5cdd…23c.min.css`: 200, 1.198.198 B roh, 163.752 B gzip | 0 | 2 |
+| Wieder an, +0 bis +30 min | `/` | 1.468.134 B (alle Punkte) | 197.0–197.6 KB | 1.118.924 B (alle Punkte) | keine im HTML, Datei weiter 200 | 212.283 B (alle Punkte) | 0 |
+| Wieder an, +0 bis +30 min | `/pelletskessel/` | 1.423.508 B (alle Punkte) | 192.8–193.2 KB | 1.118.930 B (alle Punkte) | keine im HTML, Datei weiter 200 | 201.766 B (alle Punkte) | 0 |
+
+Die Datei kommt mit `cache-control: public, max-age=31536000, immutable` und läuft über Cloudflare (zweiter Abruf `HIT`, gzip). Gegenprobe der Messung: `grep` auf die gespeicherten HTML-Dateien bestätigt 0 Treffer für `fusion-stylesheet-inline-css` im Zustand „aus“ und je einen im Zustand „an“. Ein erster Messlauf hatte die Rohgröße fälschlich aus `size_download` gelesen (das ist die Übertragungsgröße); der Fehler fiel an der Gleichheit von Roh und Übertragen auf, das Skript wurde korrigiert und alle gemeldeten Werte stammen aus dem korrigierten Lauf.
+
+### Lighthouse mobil, v13.5.0, je 3 Läufe, Median
+
+| Zustand | Seite | Score | LCP | FCP | Dokument + CSS laut Lighthouse |
+|---|---|---|---|---|---|
+| An (Endzustand) | `/` | 0,86 (0,86 / 0,86 / 0,87) | 3,93 s | 1,92 s | Dokument 211.971 B, Summe 587.795 B |
+| An (Endzustand) | `/waermepumpen/` | 0,84 (0,83 / 0,86 / 0,84) | 4,35 s | 1,86 s | – |
+| Aus | `/` | 0,80 (0,81 / 0,80 / 0,79) | 4,67 s | 2,30 s | Dokument 31.489 B + Avada-CSS 164.335 B + block-library 15.955 B, Summe 587.653 B |
+| Aus | `/waermepumpen/` | 0,80 (0,73 / 0,80 / 0,80) | 4,83 s | 2,72 s | – |
+| Referenz 23.09. (an) | `/` / `/waermepumpen/` | 0,86 / 0,84 | 3,96 s / 4,28 s | – | – |
+
+Der Endzustand deckt sich mit der Referenz vom 23.09. Der ausgeschaltete Zustand ist beim HTML 91 % kleiner (139 KB statt 1,47 MB roh), aber nicht beim Gesamtgewicht des Erstaufrufs: die 1,2 MB große Avada-Datei (164 KB gzip) steht jetzt als eigene, renderblockierende Anfrage daneben und die ungenutzten Regeln werden nicht mehr entfernt. Ergebnis: LCP +0,74 s auf der Startseite und +0,48 s auf `/waermepumpen/`, Score −0,06 bzw. −0,04. Besser wäre „aus“ nur bei Wiederholungsaufrufen (Datei ist ein Jahr cachebar); das wurde nicht gemessen. Deshalb bleibt der Ausgangszustand.
+
+### Endzustand
+
+WP Rocket → Dateioptimierung → **Optimize CSS Delivery: an**, Methode Remove Unused CSS (`remove_unused_css=1`, `async_css=0`, `async_css_mobile=1`), Safelist unverändert (39 Zeilen), 64 Formularfelder wie vorher. Gelesen am 04.10. um 09:41 nach frischem Laden der Einstellungsseite. Avada-Option „CSS Compiling Method“ unverändert **Datei**. Die beiden erzeugten Dateien unter `uploads/fusion-styles/` liegen weiter dort (Antwort 200), werden aber nicht ausgeliefert. Die Seiten sind wie vor dem Test: ca. 1,47 MB roh, ca. 197 KB übertragen.
+
+### Sichtprüfung (Endzustand, anonym)
+
+Puppeteer-core mit dem installierten Chrome, frisches Profil je Aufnahme, Viewport-Emulation statt `--screenshot`-Flag (daher ohne den bekannten Randartefakt): `/` und `/pelletskessel/` bei 1440 × 900 und 390 × 844. Kopfzeile, Navigation, Hero, Bild, Leistungsliste, Prozessleiste und Anruf-Leiste vollständig gestaltet, keine fehlenden Stile; `scrollWidth` = `clientWidth` (1440 bzw. 390), keine fehlgeschlagenen Requests und keine Antworten ≥ 400.
+
+### Antwort an Avada (Entwurf, nicht gesendet)
+
+> Test result: with "Optimize CSS Delivery" switched off, Avada writes its CSS file. With it switched on, Avada outputs the 1.1 MB inline block again.
+>
+> Setup: Avada 7.16.1, WP Rocket 3.23.3.3, "CSS Compiling Method" = File throughout.
+>
+> 1. WP Rocket > File Optimization > "Optimize CSS Delivery" off (sets remove_unused_css and async_css to 0), saved.
+> 2. Purged the WP Rocket cache and ran "Reset Avada Cache".
+> 3. Fetched the pages anonymously.
+>
+> With the option off, https://www.schmolengruber.at/ links /wp-content/uploads/fusion-styles/692f2f3678f48709066410d85432c3ca.min.css?ver=3.16.1 (HTTP 200, 1,197,595 bytes, 163,651 bytes gzip) and has no fusion-stylesheet-inline-css block. The HTML drops from 1,468,134 to 138,956 bytes (197 KB to 29 KB transferred). The directory uploads/fusion-styles exists now (it returned 404 before).
+>
+> With the option switched back on (nothing else changed), the very next request again contains the 1,118,924-byte inline block and no stylesheet link, although the file from step 2 is still there (HTTP 200) and the setting is still File. It stayed like that for 30 minutes. It is the same with ?nowprocket in the URL, so the decision seems to be made in Avada's own output, not by WP Rocket's HTML processing afterwards.
+>
+> We cannot leave the option off: without Remove Unused CSS the 1.2 MB file is render-blocking, and Lighthouse mobile on the home page goes from score 0.86 / LCP 3.9 s to 0.80 / LCP 4.7 s. Until the update to 7.16.1 on 22 Sept the home page was about 60 KB, right after it about 200 KB.
+>
+> Two questions:
+> 1. What exactly does Avada 7.16.1 check to fall back to inline output when WP Rocket's Remove Unused CSS is active (option, filter, constant)?
+> 2. Is there a supported filter or setting to keep the file output while Remove Unused CSS stays on?
+>
+> Thanks, Andreas Ostheimer
+
+### Grenzen
+
+- Im Zustand „aus“ nur mobil per curl und Lighthouse gemessen, keine Desktop-Messung und keine eigene Sichtprüfung (nur die Lighthouse-Läufe haben die Seite gerendert); dieser Zustand war etwa vier Minuten live (09:06 bis 09:10).
+- Nicht getrennt getestet, ob „aus“ allein ohne den Avada-Cache-Reset reicht. Dass „an“ trotz vorhandener Datei Inline liefert, spricht aber dafür, dass der Schalter ausschlaggebend ist und nicht der Reset.
+- Kein Zugriff auf Avada-Quelltext oder PHP-Logs; ob Avada die Option, einen Filter oder eine Konstante von WP Rocket prüft, ist offen (Frage 1 an den Support). Der `?nowprocket`-Test ist ein Indiz, kein Beweis.
+- Vorteil für Wiederholungsaufrufe im Zustand „aus“ (Browser-Cache der Avada-Datei) nicht gemessen. Lighthouse: je drei simulierte Läufe, im Zustand „aus“ auf `/waermepumpen/` ein Ausreißer (0,73).
+- Die Frage nach der Schreibprüfung von `uploads/fusion-styles` entfällt vorerst, weil die Datei entsteht und das Verzeichnis angelegt wird. Der Hinweis „JS Compiler is disabled. File does not exist or access is restricted.“ in den Avada-Optionen wurde heute nicht erneut geprüft.
+
+final result: pending
