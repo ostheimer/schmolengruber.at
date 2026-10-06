@@ -690,3 +690,112 @@ Puppeteer-core mit dem installierten Chrome, frisches Profil je Aufnahme, Viewpo
 - Die Frage nach der Schreibprüfung von `uploads/fusion-styles` entfällt vorerst, weil die Datei entsteht und das Verzeichnis angelegt wird. Der Hinweis „JS Compiler is disabled. File does not exist or access is restricted.“ in den Avada-Optionen wurde heute nicht erneut geprüft.
 
 final result: pending
+
+## Serverfrage geklärt (Antwort move1, 06.10.2026)
+
+Bezug: Issue #7 (Stand der Server-Dateien am 28.09.). Hinter der Ursprungs-IP 195.202.154.211 stehen zwei Server in einem HA-Verbund, web01 und web02. Richtig ist **web02**, erkennbar am Antwort-Header `x-host: web02`.
+
+- web02 wurde 2023 für die Seite auf schnellerer Hardware eingerichtet. web01 ist der Hauptserver und inzwischen ebenfalls schnell.
+- Die Hochverfügbarkeit läuft auf VM-Ebene.
+- Der Abgleich der Dateien von web02 nach web01 war gestört. Laut Mario ist er behoben; er hat das am 05.10. mit den Backups von Fr, Sa und So geprüft. Unterschiede gab es nur bei `fusion-gfonts` und im Cache.
+- Die alte Kopie gibt es nicht mehr. web01 bleibt im HA-Verbund.
+- Eigene Messung 06.10. um 11:29: 10 von 10 Abrufen kamen von web02.
+- **Regel bleibt:** `x-host` vor und nach jedem Speichern prüfen. Wer speichert, während web01 einspringt, verliert die Änderung. Am 28.09. gingen so alle Admin-Änderungen des Tages verloren.
+
+## Updates 06.10.2026: Avada 7.16.2, WP Rocket 3.23.5.1, WordPress 7.1.2
+
+Bezug: Issue #6. Freigabe von Andreas am 06.10.2026, Zeiten Ortszeit. Die drei Updates liefen **einzeln in dieser Reihenfolge**, nach jedem Schritt wurde nachgemessen. Messungen anonym per curl (`Mozilla/5.0`), Lighthouse 13.5.0 mobil, Sichtprüfung mit Puppeteer-core und dem eingebauten Browser. Rohdaten liegen im Scratchpad der Sitzung, die Readbacks in `design-assets/seo-migration/`.
+
+### Backup
+
+ManageWP, manuell, Name **„Vor Updates 2026-10-06 (Avada 7.16.2, WP Rocket 3.23.5.1, WP 7.1.2)“**, fertig am 06.10.2026 um 11:49, 292,99 MB (WordPress 6.8.10, Avada 7.16.1). Zusätzlich existierte das geplante Backup von 03:51. Zurückgespielt wurde nichts.
+
+### Ablauf
+
+| Zeit (ca.) | Schritt |
+|---|---|
+| 11:35–11:46 | Ausgangslage: x-host, Readback, HTML-Kennzahlen, WP-Rocket-Einstellungen gelesen, Lighthouse 2 ×, Screenshots |
+| 11:49 | Backup fertig |
+| bis 11:53 | Avada 7.16.1 → 7.16.2, danach Avada Builder 3.16.1 → 3.16.2 und Avada Core 5.16.1 → 5.16.2 (von Avada angefordert, zum selben Release), WP Rocket „Cache leeren und vorladen“ 11:53 |
+| 12:02 | WP Rocket 3.23.3.3 → 3.23.5.1, Cache leeren 12:03 |
+| 12:07 | WordPress 6.8.10 → 7.1.2–de_DE (die Datenbank wurde dabei automatisch aktualisiert, es gab keinen eigenen Dialog „Datenbank aktualisieren“), **Ursprungsabruf von web01, STOPP**, danach freigegeben |
+| 12:11 | Cache leeren, Builder-Test der Startseite, Nachmessen |
+
+### Gesamttabelle
+
+Startseite „gecacht“ = URL ohne Query-Parameter, so liefert WP Rocket die Seite aus dem Seitencache aus. „Frisch“ = mit `?nc=<zufall>`, das umgeht den Cache und enthält auch kein `wpr-usedcss`.
+
+| Messpunkt | Vorher | Avada | WP Rocket | WordPress |
+|---|---|---|---|---|
+| x-host (6 über Cloudflare + 4 am Ursprung) | 10/10 web02 | 10/10 (vor, nach Theme, nach Begleit-Plugins) | 10/10 (vor, nach Update, nach Cache leeren) | vor dem Update 10/10, **direkt danach 9/10: 1 Ursprungsabruf von web01**, dann 10/10 |
+| Versionen | Avada 7.16.1, Builder 3.16.1, Core 5.16.1, WP Rocket 3.23.3.3, WP 6.8.10 | Avada 7.16.2, Builder 3.16.2, Core 5.16.2 | WP Rocket 3.23.5.1 | WP 7.1.2 |
+| HTML Startseite, gecacht | 1.463.788 B | 1.485.715 B | 1.485.715 B | 1.483.690 B |
+| HTML Startseite, frisch | 1.246.238 B | 1.268.165 B | 1.268.165 B | 1.270.939 B |
+| `fusion-stylesheet-inline-css` | ja (1) | ja (1) | ja (1) | ja (1) |
+| `wpr-usedcss` (gecacht) | ja (1) | ja (1) | ja (1), sofort nach dem Cache-Leeren | ja (1) |
+| Link auf `uploads/fusion-styles/` | nein | nein | nein | nein |
+| `<meta name="description"` | 1 | 1 | 1 | 1 |
+| Lighthouse Lauf 1 (Performance / LCP) | 0,85 / 4,1 s | 0,86 / 3,9 s | 0,85 / 4,1 s | 0,86 / 4,0 s |
+| Lighthouse Lauf 2 (Performance / LCP) | 0,86 / 3,9 s | 0,86 / 3,9 s | 0,86 / 3,9 s | 0,87 / 3,9 s |
+| Readback gecacht gegen Vorstufe | Basis | 20 Abweichungen auf 5 Seiten (alte Cache-Kopien, siehe unten) | 0 | 0 |
+| Readback frisch gegen Vorstufe | – | 0 gegen gecacht | 0 | 0 |
+| Seiten mit Status ≠ 200 oder „kritischer Fehler“ (11) | 0 | 0 | 0 | 0 |
+| Sitemaps (`sitemap_index`, `page-sitemap`, `post-sitemap`) | 301, 301, 301 | 301 | 301 | 301 |
+| WP-Rocket-Einstellungen (nur gelesen) | `remove_unused_css=1`, `async_css=0`, `async_css_mobile=1`, `minify_css=0`, `minify_js=0`, `delay_js=1`, `defer_all_js=1`, `lazyload=1` | unverändert | unverändert, neu das Formularfeld `cdn_state=rocketcdn_free` | unverändert |
+| Auffälligkeiten | – | 5 Seiten mit neuer SEO-Ausgabe (siehe unten) | keine | ein web01-Treffer (siehe unten) |
+
+Der Readback prüft pro Seite Status, Titel, Description, Canonical, Robots, Open-Graph-/Twitter-Tags und JSON-LD (11 Seiten) sowie die drei Dateien `sitemap_index.xml`, `page-sitemap.xml`, `wp-sitemap.xml` und `robots.txt`. Bei den WP-Rocket-Einstellungen wurden alle Formularfelder verglichen; geändert haben sich nur `minify_css_key` und `minify_js_key`, die das Cache-Leeren neu erzeugt, und ab 3.23.5.1 kam das Feld `cdn_state` hinzu.
+
+### Veraltete Cache-Kopien ohne SEO-Ausgabe (05./06.10.)
+
+Beim Readback nach dem Avada-Update wichen **5 Seiten** vom Ausgangszustand ab: `/waermepumpen/`, `/klimaanlage-und-klimaanlagenservice/`, `/neubauinstallationen/`, `/sanierungsarbeiten/`, `/impressum/`.
+
+- **Vorher (gecachte Fassung, gemessen am 06.10. vor 11:44):** Titel mit Gedankenstrich „–“, keine Meta-Description, keine Open-Graph-Tags, kein JSON-LD. Das ist die Ausgabe ohne Ostheimer SEO.
+- **Nachher (nach dem ersten Cache-Leeren um 11:53):** Titel mit „-“, Description, 10 Open-Graph-Tags und JSON-LD. Das entspricht `final.json` der SEO-Migration. Canonical, Robots und Status blieben auf allen 11 Seiten gleich.
+- **Vermutung:** WP Rocket hat auf diesen Seiten veraltete Cache-Kopien ausgeliefert; das Leeren hat sie neu erzeugt. Dasselbe Muster hatte der PM am 05.10. auf `/kleine-reparaturen-und-installationen/` gesehen. Die Abweichung kommt nach dieser Einschätzung nicht von Avada.
+- **Ursache offen.** Belegen lässt sich das nicht, weil vor dem Avada-Update kein Readback ohne Cache gemacht wurde. Seitdem wird bei jedem Schritt zusätzlich die frische Ausgabe (`?nc=`) gemessen: sie war in allen Stufen identisch mit der gecachten Fassung.
+- **Überwachung läuft:** Ein Prüfskript des PM schaut 24 Stunden lang alle 10 Minuten auf Cache und frische Ausgabe. Nachverfolgung im neuen Issue „Zeitweise Antworten von web01 und Cache-Kopien ohne SEO-Ausgabe“.
+
+### web01-Treffer nach dem Kern-Update (06.10. ca. 12:07)
+
+Direkt nach dem WordPress-Update kam bei der x-host-Prüfung **ein Ursprungsabruf von vier** von web01 (Cloudflare 6 von 6 web02). Das war ein STOPP nach den Regeln dieses Auftrags. Danach:
+
+- Eigene Wiederholung ca. 12:08: 12 von 12 Ursprungsabrufen und 3 von 3 über Cloudflare web02, alle mit `generator` „WordPress 7.1.2“. Weitere vollständige Prüfungen um 12:10, 12:11 und nach dem Builder-Test jeweils 10 von 10.
+- Der PM hat anschließend 120 Abrufe direkt am Ursprung gemacht: 120 von 120 web02 (Ostheimer SEO 1.5.0, Avada 7.16.2).
+- **Vermutung des PM, nicht belegt:** Der Wartungsmodus während des Kern-Updates (503) hat die HA kurz auf web01 umschalten lassen.
+- **Nicht aufgezeichnet:** Größe und Inhalt der web01-Antwort; das Skript hat nur den Header gespeichert. Ob der Abgleich der Dateien nach web01 zu diesem Zeitpunkt schon den neuen Stand hatte, ist offen.
+- In derselben Minute wurde `wp-admin/update-core.php` geöffnet, bevor das Ergebnis der Prüfung gelesen war (ein reines Lesen, nichts gespeichert). Welcher Server es beantwortet hat, ist unbekannt.
+
+### Builder-Test der Startseite (nach dem Kern-Update)
+
+12:11, direkt davor x-host am Ursprung 4 von 4 web02. `post.php?post=2&action=edit` geöffnet: Der Avada Builder lädt (Schalter „Back-end Builder“, Metaboxen „Avada Builder Settings“, „Avada Builder“, „Library“, „Saved Containers/Columns/Elements“, `FusionPageBuilderApp` geladen), kein „kritischer Fehler“, keine Konsolenfehler. **Ohne Speichern verlassen**, es erschien kein „Seite verlassen?“-Dialog. Die Bearbeitungssperre (`_edit_lock`) kann dabei geschrieben worden sein; das war freigegeben.
+
+### Lighthouse mobil, v13.5.0, 2 Läufe je Stufe, Startseite
+
+| Stufe | Lauf 1 | Lauf 2 | FCP | Gesamtgröße laut Lighthouse |
+|---|---|---|---|---|
+| Vorher | 0,85 / LCP 4,1 s | 0,86 / 3,9 s | 2,1 s | 574 KiB |
+| Avada | 0,86 / 3,9 s | 0,86 / 3,9 s | 2,0 s | 577 KiB |
+| WP Rocket | 0,85 / 4,1 s | 0,86 / 3,9 s | 2,0 s | 577 KiB |
+| WordPress | 0,86 / 4,0 s | 0,87 / 3,9 s | 1,8–2,0 s | 577 KiB |
+
+Alle Werte liegen im Rahmen der Referenz vom 04.10. (0,86 / LCP 3,93 s); TBT 0 ms, CLS 0.
+
+### Sichtprüfung
+
+Anonym mit Puppeteer-core und frischem Profil je Aufnahme: `/` und `/waermepumpen/` bei 1440 × 900 und 390 × 844, vollständige Seite, vor jedem Update und nach jeder Stufe. Je Aufnahme `scrollWidth` = `clientWidth`, keine Antworten ≥ 400, kein „kritischer Fehler“. Seitenhöhen in allen Stufen gleich (2635, 3396, 1912, 3161 px). Die PNG-Prüfsummen sind nach WP Rocket und nach WordPress bei allen vier Aufnahmen gleich dem Ausgangszustand; nach Avada war nur die Aufnahme `/` Desktop in den Bytes anders, im Bild war kein Unterschied zu erkennen. Dazu im eingebauten Browser (angemeldet, mit Admin-Leiste) Start- und Wärmepumpen-Seite mobil und der Kopfbereich auf Desktop: Kopfzeile, Navigation, Hero, Bild und Anrufleiste vollständig gestaltet.
+
+### Ergebnis für Issue #6
+
+Der **Inline-Block bleibt** mit Avada 7.16.2, WP Rocket 3.23.5.1 und WordPress 7.1.2: `fusion-stylesheet-inline-css` 1, `wpr-usedcss` 1, kein Link auf `uploads/fusion-styles/`. Die Startseite ist gecacht 1,48 MB groß (vorher 1,46 MB), Lighthouse unverändert bei 0,85 bis 0,87 und LCP 3,9 bis 4,1 s. Die Updates haben das CSS-Problem weder behoben noch verschlechtert.
+
+### Grenzen
+
+- Der Inline-Block wurde in jeder Stufe nur wenige Minuten beobachtet (nach Avada ca. 5 Minuten, dann nach jedem Schritt ein bis zwei Messungen), nicht wie am 04.10. über 30 Minuten.
+- Lighthouse: zwei simulierte Läufe je Stufe auf der Startseite, keine Messung von `/waermepumpen/`.
+- Die Sichtprüfung im eingebauten Browser war wegen der Breite des Browser-Fensters nur teilweise bei 1440 Breite möglich; die vollständigen Desktop-Aufnahmen stammen von Puppeteer. Kein Test auf einem physischen Gerät.
+- Die WP-Rocket-Einstellungen wurden nur gelesen, nicht gespeichert. Ein Feld mehr (`cdn_state`) im Formular nach 3.23.5.1 wurde nicht weiter geprüft.
+- Zwei Befunde bleiben offen: die Ursache der veralteten Cache-Kopien und der einmalige web01-Treffer. Beide laufen im neuen Issue weiter.
+- Der Zustand des Dateiabgleichs web02 → web01 nach dem Kern-Update wurde nicht geprüft; das klärt der PM mit move1.
+
+final result: passed
