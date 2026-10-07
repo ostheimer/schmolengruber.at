@@ -755,6 +755,15 @@ Beim Readback nach dem Avada-Update wichen **5 Seiten** vom Ausgangszustand ab: 
 - **Vermutung:** WP Rocket hat auf diesen Seiten veraltete Cache-Kopien ausgeliefert; das Leeren hat sie neu erzeugt. Dasselbe Muster hatte der PM am 05.10. auf `/kleine-reparaturen-und-installationen/` gesehen. Die Abweichung kommt nach dieser Einschätzung nicht von Avada.
 - **Ursache offen.** Belegen lässt sich das nicht, weil vor dem Avada-Update kein Readback ohne Cache gemacht wurde. Seitdem wird bei jedem Schritt zusätzlich die frische Ausgabe (`?nc=`) gemessen: sie war in allen Stufen identisch mit der gecachten Fassung.
 - **Überwachung läuft:** Ein Prüfskript des PM schaut 24 Stunden lang alle 10 Minuten auf Cache und frische Ausgabe. Nachverfolgung im neuen Issue „Zeitweise Antworten von web01 und Cache-Kopien ohne SEO-Ausgabe“.
+- **Ergebnis der Überwachung (06.10. 12:01 bis 07.10. 12:35):**
+  - 144 Läufe mit je 11 Seiten, gemessen wurden die gecachte und die frische Fassung.
+  - Alle 3.167 Antworten hatten `x-host: web02`.
+  - Alle 1.584 gecachten und 1.583 frischen Fassungen hatten Meta-Description und JSON-LD. Ein frischer Abruf (`/sanierungsarbeiten/`, 06.10. 16:31) lief nach 40 s ins Timeout.
+  - WP Rocket hat den Cache in dieser Zeit dreimal neu aufgebaut, alle Seiten wieder mit SEO-Ausgabe. Die Neuaufbauten liefen um 21:11 UTC, um 07:12 UTC und für `/` und `/pelletskessel/` um 08:05 UTC; die Lebensdauer liegt also bei rund 10 Stunden.
+  - Das Muster vom 05./06.10. hat sich nicht wiederholt.
+  - Damals haben zwei Neuaufbauten Kopien ohne SEO-Ausgabe erzeugt: am 05.10. um 15:17 UTC und am 06.10. früh, rund 10 Stunden nach dem Leeren um 22:42.
+  - Am 05.10. hat move1 am Abgleich zu web01 gearbeitet. Ein Zusammenhang ist möglich, aber nicht belegt.
+  - Beim nächsten Update daher vorher und nachher die frische Fassung messen und die Überwachung erneut laufen lassen.
 
 ### web01-Treffer nach dem Kern-Update (06.10. ca. 12:07)
 
